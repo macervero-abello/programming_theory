@@ -1,4 +1,6 @@
-# Conceptes bàsics. Què és un algorisme?
+# Conceptes bàsics
+
+## Què és un algorisme?
 Programar significa resoldre problemes creant, o implementant, algorismes. Un **algorisme** és un conjunt ordenat i finit d'operacions o instruccions que permeten trobar la solució d'un problema.
 
 ## Característiques d'un algorisme
@@ -45,5 +47,77 @@ Les dades són el conjunt d'informació que cal tractar i poden ser:
 Les expressions són les operacions que es realitzen sobre les dades i estan formades per:
 * Operands: són les dades que es volen operar
   * Literals: dades en cru
-  * Constants: valor inalterable, és a dir, l'algorisme no les pot modificar de cap manera. Es defineixen indicant el tipus de dada que es vol, el nom que s'utilitzarà per accedir-hi i el valor.
-  * Variables: el seu valor es pot alterar durant l'execició del programa. Es defineixen indicant el tipus de dada que es vol, el nom que s'utilitzarà per accedir-hi i el seu valor inicial.
+  ```java
+    3;
+    'a';
+  ```
+  * Constants: valor inalterable, és a dir, l'algorisme no les pot modificar de cap manera. Es defineixen indicant el tipus de dada que es vol, el nom que s'utilitzarà per accedir-hi i el valor. Poden ser numèriques, alfabètiques, alfanumèriques o estructures més complexes.
+  ```java
+    final int NUM_TEACHERS = 28;
+  ```
+  * Variables: el seu valor es pot alterar durant l'execició del programa. Es defineixen indicant el tipus de dada que es vol, el nom que s'utilitzarà per accedir-hi i el seu valor inicial. Poden ser numèriques, alfabètiques, alfanumèriques o estructures més complexes.
+  ```java
+    char vowel = 'a';
+  ```
+* Operadors: són les operacions que s'executen sobre les dades
+  * Comentaris: permeten afegir explicacions al codi sense alterar-ne la seva execució ja que, en el moment de crear l'executable, aquests comentaris desapareixen. Poden ser d'una sola línia o multilínia
+  ```java
+    // Aquest és un comentari d'una sola línia
+    /* 
+      Aquest comentari
+      conté dos línies
+    */
+    /**
+     * Aquest comentari
+     * també és multilínia
+     */
+  ```
+  * Assignació: permet assignar un valor a una dada en concret (=)
+  ```java
+    int num;
+    num = 2;
+  ```
+  * Aritmètics: representen les operacions bàsiques de suma (+), resta (-), multiplicació (*), divisió (/), mòdul (% o mod) i exponenciació (^)
+  ```java
+    int num1 = 3
+    int num2 = 4;
+    int num;
+
+    num = num1 * num2;
+  ```
+  * Alfanumèrics: operació bàsica de concatenació (+)
+  ```java
+    String name = "M.Àngels";
+    String surname = "Cerveró Abelló";
+    String completeName;
+
+    completeName = name + surname;
+  ```
+  * Relacionals o condicionals: permeten elaborar operacions de condició per consultar l'estat de les dades. Les condicions que es poden consultar són la d'igualtat (==), diferència (!=), menor que (<), major que (>), menor o igual que (<=) i major o igual que (>=)
+  ```java
+    int num1 = 3;
+    int num2 = 4;
+    boolean result;
+
+    result = num1 == num2;
+    result = num1 <= num2;
+  ```
+  * Parèntesis: estableixen prioritat, és a dir, quines operacions es fan abans que unes altres
+  ```java
+    int num1 = 3;
+    int num2 = 4;
+    boolean result;
+
+    result = (num1 == num2);
+    result = (num1 <= num2);
+  ```
+  * Lògics: són les operacions NOT (!), AND bit a bit (&), OR bit a bit (|), AND condicional (&&) i OR condicional (||).
+  ```java
+    int num1 = 3;
+    int num2 = 4;
+    int num3;
+    boolean resultat;
+
+    num2 = num1 & num2;
+    resultat = num1 == num2 || num1 < num2;
+  ```
