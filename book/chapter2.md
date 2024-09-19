@@ -29,6 +29,6 @@ Els tipus primitius són els següents:
   * Booleans (lògics): permeten representar la idea de *cert* o *fals* i són molt útils per crear condicions o per consultar estats. En Java només hi ha un tipus primitiu que representa un tipus lògic, el `boolean`.
   * Text: permeten representar **un únic** caràcter ('!', 'a', 'T', '4', '@', etc.). En Java, el tipus que permet representar un caràcter és el `char`.
 
-![Rang de dades](img/primitive_types_ranges.png "Rang de dades")
+![Rang de dades](img/primitive_types_ranges.png)
 
-https://howtodoinjava.com/java/basics/primitive-data-types-in-java/
+<!-- https://howtodoinjava.com/java/basics/primitive-data-types-in-java/ -->
