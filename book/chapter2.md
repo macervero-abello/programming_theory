@@ -32,8 +32,8 @@ Els tipus primitius són els següents:
 La [Figura 1](#fig:data_rank)
 
 
-[fig:data_rank]: img/primitive_types_ranges.png "Figura 1: rang de dades"
-![Figura 1: rang de dades][fig:data_rank]
+<!--[fig:data_rank]: img/primitive_types_ranges.png "Figura 1: rang de dades"-->
+![Figura 1: rang de dades](img/primitive_types_ranges.png){#fig:data_rank}
 
 <!-- ![Rang de dades][fig:data_rang](img/primitive_types_ranges.png) -->
 
