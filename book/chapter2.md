@@ -10,10 +10,10 @@ Un cop declarada, ja la podrem utilitzar i **assignar-li** valors.
 
 ## Tipus de dades
 Els tipus de dades defineixen els valors que poden assignar a les variables i poden ser
- * tipus de dades primitius o
- * tipus de dades complexes
+ * tipus primitius o
+ * tipus complexes
 
-### Tipus de dades primitius
+### Tipus primitius
 Són els tipus de dades més bàsiques i venen predefinides dins del llenguatge. Cada tipus primitiu ocupa un determinat nombre de bits a memòria RAM; la quantita de bits que s'utilitzen determinarà el rang de dades que pot representar.
 
 Els tipus primitius són els següents:
@@ -29,6 +29,12 @@ Els tipus primitius són els següents:
   * Booleans (lògics): permeten representar la idea de *cert* o *fals* i són molt útils per crear condicions o per consultar estats. En Java només hi ha un tipus primitiu que representa un tipus lògic, el `boolean`.
   * Text: permeten representar **un únic** caràcter ('!', 'a', 'T', '4', '@', etc.). En Java, el tipus que permet representar un caràcter és el `char`.
 
-![Rang de dades](img/primitive_types_ranges.png)
+La [Figura 1](#fig:data_rank)
+
+
+[fig:data_rank]: img/primitive_types_ranges.png "Figura 1: rang de dades"
+![Figura 1: rang de dades][fig:data_rank]
+
+<!-- ![Rang de dades][fig:data_rang](img/primitive_types_ranges.png) -->
 
 <!-- https://howtodoinjava.com/java/basics/primitive-data-types-in-java/ -->
