@@ -5,6 +5,7 @@ Els continguts d'aquesta guia expliquen els conceptes de programació basant els
 ## Bloc formatiu 1 - Programació estructurada i programació modular
 * [Capítol 1. Conceptes bàsics](chapter1.md)
 * [Capítol 2. Variables](chapter2.md)
+* [Capítol 3. Constants](chapter3.md)
 
 
 ## Llicència
