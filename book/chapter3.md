@@ -28,9 +28,9 @@ El següent tros de codi mostra diversos exemples de creació i ús de constants
 ```java
   final float PI = 3.1416f;                                     //Declaració d'una constant per emmagatzemar el valor del nombre PI
   final String NAME = "M.Àngels", SURNAME = "Cerveró Abelló";   //Declaració de dos (o més) constants del mateix tipus en una sola instrucció
-  float radius = 3.0f, perimetre;                               //Declaració de variables
+  float radius = 3.0f, perimeter;                               //Declaració de variables
   final float RADIUS = radius;                                  //Declaració d'una constant, tot assignant-li el valor contingut en una variable
 
-  perimetre = 2 * PI * RADIUS;                                  //Càlculs utilitzant constants
-  perimetre = 2 * PI * radius;                                  //Càlculs utilitzant constants i variables
+  perimeter = 2 * PI * RADIUS;                                  //Càlculs utilitzant constants
+  perimeter = 2 * PI * radius;                                  //Càlculs utilitzant constants i variables
 ```
