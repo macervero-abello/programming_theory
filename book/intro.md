@@ -6,6 +6,8 @@ Els continguts d'aquesta guia expliquen els conceptes de programació basant els
 * [Capítol 1. Conceptes bàsics](chapter1.md)
 * [Capítol 2. Variables](chapter2.md)
 * [Capítol 3. Constants](chapter3.md)
+* Captíol 4. Bloc de codi](chapter4.md)
+* [Capítol 5. Control de flux condicional](chapter5.md)
 
 
 ## Llicència

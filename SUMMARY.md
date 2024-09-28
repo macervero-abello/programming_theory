@@ -4,3 +4,5 @@
 * [Capítol 1. Conceptes bàsics](book/chapter1.md)
 * [Capítol 2. Variables](book/chapter2.md)
 * [Capítol 3. Constants](book/chapter3.md)
+* [Captíol 4. Bloc de codi](book/chapter4.md)
+* [Capítol 5. Control de flux condicional](book/chapter5.md)
