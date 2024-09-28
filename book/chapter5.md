@@ -98,7 +98,6 @@ Per exemple, en el codi següent
 9       System.out.println("Quarta desena o superior"); 
 10  }
 11  System.out.println("Finalització del programa");
-}
 ```
 com que la condició de l'`if` de la línia 2 és certa, s'executen les línies 3 i 11, de tal manera que les línies que van de la 4 a la 10 s'ignoren completament. En canvi, en el codi 
 ```java
@@ -116,7 +115,6 @@ com que la condició de l'`if` de la línia 2 és certa, s'executen les línies 
 12       System.out.println("Quarta desena o superior"); 
 13  }
 14  System.out.println("Finalització del programa");
-}
 ```
 tot i que la condició del l'`if` de la línia 2 sigui certa, la resta siguin falses i el resultat per pantalla sigui el mateix, l'ordinador ha d'avaluar totes i cadascuna de les condicions de manera independent, per tant, no pot ignorar el codi que va de la línia 5 a la 13.
 
