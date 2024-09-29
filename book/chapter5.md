@@ -120,3 +120,79 @@ tot i que la condició del l'`if` de la línia 2 sigui certa, la resta siguin fa
 
 ### Sentència `switch-case`
 La sentència `switch-case` permet crear un flux condicional múltiple on les condicions que s'avaluen sempre són d'igualtat, és a dir, mitjançant l'operador `==`.
+
+L'estructura de la sentència `switch-case` és la següent:
+```java
+    switch(expression) {
+        case value1:
+            //Bloc de codi que volem executar si expression és igual a value1 (expression == value1)
+            break;
+        case value2:
+            //Bloc de codi que volem executar si expression és igual a value2 (expression == value2)
+            break;
+        case value3:
+            //Bloc de codi que volem executar si expression és igual a value3 (expression == value3)
+            break;
+        .
+        .
+        .
+        default:
+            //Bloc de codi que volem executar si expression no és igual a cap dels valors anteriors (expression != value1 && expression != value2 && expression != value3 && ...) 
+    }
+```
+En el cas de la sentència `switch-case`, `expression` acostuma a ser una variable, però també pot ser una operació matemàtica.
+
+La Figura 5.4 mostra el diagrama de flux corresponent a la sentència `switch-case`, de tal manera que:
+1. Primer s'executen les instruccions que hi ha abans del `switch-case` (bloc 1)
+2. A continuació s'avalua quin valor té l'`expression` del `switch`
+3. Si `expression` pren per valor `value1`, s'executa el codi del primer `case` (bloc 2) i, un cop executat, es continua executant les instruccions que hi ha després del `switch-case` (bloc 6)
+4. Si `expression` pren per valor `value2`, s'executa el codi del segon `case` (bloc 3) i, un cop executat, es continua executant les instruccions que hi ha després del `switch-case` (bloc 6)
+5. Si `expression` pren per valor `value3`, s'executa el codi del tercer `case` (bloc 4) i, un cop executat, es continua executant les instruccions que hi ha després del `switch-case` (bloc 6) i així successivament
+6. Si `expression` no pren per valor cap dels `values` definits als `cases`, s'executa el codi `default` (bloc 5) i, un cop executat, es continua executant les instruccions que hi ha després del `switch-case` (bloc 6)
+
+![Figura 5.4: diagrama de flux de la sentència `switch-case`](img/switchcase_flowchart.png)
+
+#### Sentència `break` i ordre dels diversos `cases`
+En el cas de la sentència `switch-case` cal anar molt en compte en posar, o no (segons el resultat desitjat), la sentència `break`. En cas que alguna d'aquestes sentències no es posi, pot ser que s'executin diversos `cases`, un rera l'altre, fins que es trobi el següent `break`.
+
+Per exemple, la Figura 5.5 mostra el diagrama de flux corresponent al següent codi:
+```java
+    int myValue = 2
+    switch(myValue):
+        case 1:
+            System.out.println("És un 1");
+            break;
+        case 2:
+            System.out.println("És un 2");
+        case 3:
+            System.out.println("És un 3");
+        case 4:
+            System.out.println("És un 4");
+            break;
+        default:
+            System.out.println("No sé quin número és...)
+    }
+```
+![Figura 5.5: diagrama de flux de la sentència `switch-case` corresponent al codi anterior](img/switchcase_1_flowchart.png)
+
+Els únics `cases` que finalitzen el bloc de codi del `switch-case` són el `case 1`, el `case 4` i el `default`, que és l'últim. La resta, com que no tenen la sentència `break` no trenquen el `switch-case` i, per tant, quan el flux d'execució entri al `case 2` (perquè `myValue==2`) s'executaran els `cases` 2, 3 i 4, un darrera de l'altre.
+
+Si canviem l'ordre dels `cases`, tal com mostra el següent codi:
+```java
+    int myValue = 2
+    switch(myValue):
+        case 1:
+            System.out.println("És un 1");
+            break;
+        case 3:
+            System.out.println("És un 3");
+        case 2:
+            System.out.println("És un 2");
+        case 4:
+            System.out.println("És un 4");
+            break;
+        default:
+            System.out.println("No sé quin número és...)
+    }
+```
+només s'executaran els `cases` 2 i 4, és a dir, des del primer que compleix la igualtat de valor fins al que conté la següent sentència `break`. Així doncs, cal anar molt en compte en el moment de jugar amb l'ordre dels `cases` i en el moment de decidir si posar o no un `break`.
