@@ -170,7 +170,7 @@ Per exemple, la Figura 5.5 mostra el diagrama de flux corresponent al següent c
             System.out.println("És un 4");
             break;
         default:
-            System.out.println("No sé quin número és...)
+            System.out.println("No sé quin número és...");
     }
 ```
 ![Figura 5.5: diagrama de flux de la sentència `switch-case` corresponent al codi anterior](img/switchcase_1_flowchart.png)
@@ -192,7 +192,7 @@ Si canviem l'ordre dels `cases`, tal com mostra el següent codi:
             System.out.println("És un 4");
             break;
         default:
-            System.out.println("No sé quin número és...)
+            System.out.println("No sé quin número és...");
     }
 ```
 només s'executaran els `cases` 2 i 4, és a dir, des del primer que compleix la igualtat de valor fins al que conté la següent sentència `break`. Així doncs, cal anar molt en compte en el moment de jugar amb l'ordre dels `cases` i en el moment de decidir si posar o no un `break`.
