@@ -35,6 +35,7 @@ La Figura 6.1 mostra el diagrama de flux corresponent a la sentència `while`, d
 
 ![Figura 6.1: diagrama de flux de la sentència `while`](img/while_flowchart.png)
 
-<div style="background-color: #f44336; color: #ffffff;">
-    <span style="font-weight: bold">Important</span>: si les variables que afecten a la condició no estan ben inicialitzades i no s'actualitzen correctament es crearà un <code>while</code> infinit, per tant, cal anar amb molt de compte.
-</div>
+<!-- Notació Gitbook per poder fer blocs ressaltats-->
+{% hint style="danger" %}
+**Important:** si les variables que afecten a la condició no estan ben inicialitzades i no s'actualitzen correctament es crearà un `while` infinit, per tant, cal anar amb molt de compte.
+{% endhint %}
