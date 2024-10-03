@@ -39,3 +39,41 @@ La Figura 6.1 mostra el diagrama de flux corresponent a la sentència `while`, d
 {% hint style="danger" %}
 **Important:** si les variables que afecten a la condició no estan ben inicialitzades i no s'actualitzen correctament es crearà un `while` infinit, per tant, cal anar amb molt de compte.
 {% endhint %}
+
+## Sentència `do-while`
+La sentència `do-while` és molt similar a la sentència `while` i només difereix en com avalua la condició:
+* en el cas del `while` primer s'avalua la condició i, segons el resultat, s'executa, o no, el bloc de codi intern;
+* en canvi, en el cas del `do-while`, primer s'executa el bloc de codi intern i, després, s'avalua la condició de tal manera que, si aquesta és certa, es torna a executar el bloc de codi.
+
+Així doncs, podem dir que en el `do-while` el bloc de codi intern sempre s'executa, com a mínim, una vegada.
+
+L'estructura de la sentència `do-while` és la següent:
+```java
+    do {
+        //Bloc de codi que volem executar (i anar repetint); com a mínim s'executa sempre una vegada
+    }
+    while(condition);
+```
+
+La Figura 6.2 mostra el diagrama de flux corresponent a la sentència `do-while`, de tal manera que:
+1. Primer s'executen les instruccions que hi ha abans del `do-while` (bloc 1);
+2. A continuació s'executa el bloc de codi intern del `do-while` (bloc 2), el qual haurà d'**actualitzar el valor de les variables de la condició** en algun moment
+3. Un cop executat el codi, s'avalua la condició del `do-while`
+4. Si la condició és `true` es tornen a executar les instruccions internes del `do-while` (bloc 2), és a dir, es torna al pas 2
+5. Si la condició és `false`, el `do-while` acaba i s'executa el codi que hi ha a continuació (bloc 3)
+
+![Figura 6.2: diagrama de flux de la sentència `do-while`](img/dowhile_flowchart.png)
+
+## Sentència `for`
+En els dos apartats anteriors s'ha vist que les sentències `while` i `do-while` gestionen el nombre d'iteracions (voltes) que fa el bucle mitjançant una condició general, més o menys complexa. La sentència `for`, en canvi, s'utilitza molt quan hi ha un *comptador* de voltes, és a dir, d'alguna manera se sap quantes iteracions s'han de fer, sigui perquè és un nombre fixe o perquè hi ha una variable que les comptabilitza.
+
+L'estructura de la sentència `for` és la següent
+```java
+    for(initialization; condition; update) {
+        //Bloc de codi que volem executar (i anar repetint)
+    }
+```
+on:
+`initialization`: inicialitza les variables que afecten la condició; si la inicialització té múltiples instruccions, aquestes se separen per coma (,)
+`condition`: és la condició que permet entrar dins del bloc de codi del `for` (en cas que s'avaluï `true`); la condició s'avalua **abans de cada iteració**
+`update`: instruccions que actualitzen el valor de les variables que afecten la condició; si hi ha múltiples instruccions, aquestes se separen per coma (,); l'actualització s'executa al **final de cada iteració**
