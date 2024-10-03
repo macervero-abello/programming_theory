@@ -1,0 +1,72 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" version="24.7.16">
+  <diagram name="Page-1" id="T-gzN3W7ZyekmYyn_9fb">
+    <mxGraphModel dx="1434" dy="751" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-14" value="" style="verticalLabelPosition=top;verticalAlign=bottom;html=1;shape=mxgraph.basic.rect;fillColor2=none;strokeWidth=3;size=20;indent=100;fillColor=#d5e8d4;strokeColor=#82b366;align=right;horizontal=1;labelPosition=left;labelBackgroundColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="360" y="540" width="399" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-15" value="&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Instruccions abans de la sentència WHILE&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;b&gt;Inicialització de les variables que afecten la condició&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=3;align=left;" vertex="1" parent="1">
+          <mxGeometry x="413" y="350" width="242" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-16" value="&lt;b&gt;condition&lt;/b&gt;" style="strokeWidth=3;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="464" y="580" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-17" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=3;" edge="1" parent="1" source="eLmJEH-nsi4JKKOhxShT-15" target="eLmJEH-nsi4JKKOhxShT-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="510" y="780" as="sourcePoint" />
+            <mxPoint x="660" y="590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-18" value="&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Bloc de codi de la sentència WHILE&lt;br&gt;&lt;/b&gt;&lt;br&gt;&lt;b&gt;Actualització de les variables que afecten la condició&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=3;align=left;" vertex="1" parent="1">
+          <mxGeometry x="407" y="735" width="254" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-19" value="&lt;b&gt;true&lt;/b&gt;" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;fillColor=#dae8fc;strokeColor=#6c8ebf;curved=0;jumpSize=20;strokeWidth=3;labelBackgroundColor=#d5e8d4;" edge="1" parent="1" source="eLmJEH-nsi4JKKOhxShT-16" target="eLmJEH-nsi4JKKOhxShT-18">
+          <mxGeometry x="-0.2941" y="26" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="780" as="sourcePoint" />
+            <mxPoint x="530" y="730" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-20" value="&lt;b&gt;Instruccions després de la sentència WHILE&lt;br&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="436" y="980" width="196" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-21" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="eLmJEH-nsi4JKKOhxShT-18" target="eLmJEH-nsi4JKKOhxShT-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="534" y="810" as="sourcePoint" />
+            <mxPoint x="534" y="890" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="534" y="820" />
+              <mxPoint x="380" y="820" />
+              <mxPoint x="380" y="615" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-22" value="&lt;b&gt;false&lt;/b&gt;" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;edgeStyle=orthogonalEdgeStyle;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;fillColor=#dae8fc;strokeColor=#6c8ebf;labelBackgroundColor=#d5e8d4;" edge="1" parent="1" source="eLmJEH-nsi4JKKOhxShT-16" target="eLmJEH-nsi4JKKOhxShT-20">
+          <mxGeometry x="-0.8261" y="15" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="780" as="sourcePoint" />
+            <mxPoint x="770" y="690" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="730" y="615" />
+              <mxPoint x="730" y="1010" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-23" value="&lt;b&gt;Sentència while&lt;br&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="649" y="510" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-24" value="&lt;b&gt;1&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="632" y="420" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-25" value="&lt;span&gt;2&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="640" y="790" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eLmJEH-nsi4JKKOhxShT-26" value="&lt;b&gt;3&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="610" y="1020" width="30" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
