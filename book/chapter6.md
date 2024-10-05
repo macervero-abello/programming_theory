@@ -164,11 +164,13 @@ Si ens hi fixem, el `for` extern farà 10 voltes i, per cadascuna d'aquestes vol
 ### Exemple de dos bucles niats dependents
 ```java
     final int EXTERNAL_ITERS = 10;
+    int iterCounter = 0;
     for(int i=0; i<EXTERNAL_ITERS; i++) {
         System.out.println("for extern amb i = " + i);
         for(int j=0; j<=i; j++) {
             System.out.println("for intern amb j = " + j);
-            System.out.println("Volta total número " + (i * EXTERNAL_ITERS + j));
+            System.out.println("Volta total número " + iterCounter);
+            iterCounter++;
         }
     }
 ```
