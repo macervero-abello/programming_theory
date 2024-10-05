@@ -9,6 +9,7 @@ Els continguts d'aquesta guia expliquen els conceptes de programació basant els
 * [Captíol 4. Bloc de codi](book/chapter4.md)
 * [Capítol 5. Control de flux condicional](book/chapter5.md)
 * [Capítol 6. Control de flux iteratiu](book/chapter6.md)
+* [Capítol 7. Cadenes de caràcters: la classe `String`](book/chapter7.md)
 
 
 ## Llicència
