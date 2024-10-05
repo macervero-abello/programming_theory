@@ -62,3 +62,93 @@ El codi següent mostra com s'utilitza el mètode:
     areEquals = course1.equals(course3);    //Retornarà true
     areEquals = str1.equals(str2);          //Retornarà false
 ```
+
+### Mètode `equalsIgnoreCase()`
+El mètode [`equalsIgnoreCase()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#equalsIgnoreCase(java.lang.String)) també permet comparar per igualtat dues cadenes de caràcters.
+```java
+    boolean equalsIgnoreCase(String str);
+```
+S'utilitza igual que el mètode `equals()`, és a dir, per poder comparar les dues variables (o constants) de tipus `String` `str1` i `str2` s'ha de fer de la manera següent: `nom_variable1.equalsIgnoreCase(nom_variable2)`;
+```java
+    str1.equalsIgnoreCase(str2);
+    str2.equalsIgnoreCase(str1);
+
+    /*Les dues sentències són equivalents; no importa quina variable
+        s'utilitza primer, str1 o str2, ja que el resultat és el mateix*/
+```
+Ara però, al contrari que el mètode `equals()`, l'`equalsIgnoreCase()` no té en compte les majúscules i minúscules. Per exemple:
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String name1 = "M.Àngels";
+    String name2 = "M.ÀNGELS";
+    String name3 = "M.Àngels";
+    String course1 = "\tDAM 1";
+    String course2 = "DAM 1\n";
+    String course3 = "\tDAM 1";
+    String course4 = "\tdam 1";
+    String str1 = "Bon dia!";
+    String str2 = "Bon dia, com esteu?";
+    boolean areEquals;
+
+    areEquals = name1.equals(name2);        /*Retornarà true
+                                                (ignora majúscules i minúscules)*/
+    areEquals = name1.equals(name3);        //Retornarà true
+    areEquals = course1.equals(course2);    //Retornarà false
+    areEquals = course1.equals(course3);    //Retornarà true
+    areEquals = course1.equals(course4);    //Retornarà true
+    areEquals = str1.equals(str2);          //Retornarà false
+```
+
+### Mètode `regionMatches()`
+El mètode `regionMatches()` permet comparar per igualtat fragments de dues cadenes de caràcters (no fa falta comparar les cadenes de principi a final). Aquest mètode té dues *sobrecàrregues*, segons si es vol comparar els fragments tenint en compte les majúscules i minúscules o no:
+* [`reginMatches()` sobrecàrrega 1](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#regionMatches(int,java.lang.String,int,int))
+* [`reginMatches()` sobrecàrrega 2](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#regionMatches(boolean,int,java.lang.String,int,int))
+```java
+    boolean regionMatches(int toffset, String str, int ooffset, int length);                        //Case-sensitive
+    boolean regionMatches(boolean ignoreCase, int toffset, String str, int ooffset, int length);
+```
+Per poder comparar fragments de dues variables (o constants) de tipus `String` `str1` i `str2` s'ha de fer de la manera següent: `nom_variable1.regionMatches(parameters)`.
+
+Explicació dels paràmetres:
+* `toffset`: posició de la cadena `str1` on comença el fragment que volem comparar
+* `ooffset`: posició de la cadena `str2` on comença el fragment que volem comparar
+* `length`: llargada del segment que volem comparar (número de caràcters que té el fragment)
+* `ignoreCase`: indica si volem que el mètode tingui en compte majúscules i minúscules (`true`) o no (`false`)
+
+El codi següent mostra com s'utilitzen el dos mètodes:
+```java
+    String name1 = "M.Àngels";
+    String name2 = "M.ÀNGELS";
+    String course1 = "\tDAM 1";
+    String course2 = "DAM 1\n";
+    String course3 = "\tdam 1";
+    String str1 = "El meu gos és negre";
+    String str2 = "Loki, el meu gos";
+    boolean areEquals;
+
+    areEquals = name1.equals(0, name2, 0, 3);               //Retornarà true
+    areEquals = name1.equals(0, name2, 0, 5);               //Retornarà false
+    areEquals = course1.equals(1, course2, 0, 5);           //Retornarà true
+    areEquals = course1.equals(false, 0, course3, 0, 5);    //Retornarà true
+    areEquals = course1.equals(true, 0, course3, 0, 5);     //Retornarà false
+    areEquals = course1.equals(0, course3, 0, 5);           //Retornarà false
+    areEquals = str1.equals(7, str2, 13, 3);                //Retornarà true
+```
+
+### Mètode `compareTo()`
+El mètode `compareTo()` compararà dues cadenes de caràcters (`String`) de manera alfabètica, és a dir, tenint en compte l'ordre que ocupen les lletres i caràcters dins de l'alfabet (o dins de la distribució *Unicode*).
+```java
+    int compareTo(String str);
+```
+Per comparar dues variables (o constants) de tipus `String` `str1` i `str2` s'ha de fer de la manera següent: `nom_variable1.compareTo(nom_variable2)`:
+```java
+    str1.compareTo(str2);
+    str2.compareTo(str1);
+
+    /*Les dues sentències són equivalents; no importa quina variable
+        s'utilitza primer, str1 o str2, ja que el resultat és el mateix*/
+```
+i el mètode retornarà:
+* 0 si `str1` i `str2` són iguals
+
+### Mètode `compareToIgnoreCase()`
