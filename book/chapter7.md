@@ -39,7 +39,8 @@ Si les dues cadenes són idèntiques (mateixos caràcters, tenint en compte maj�
     str1.equals(str2);
     str2.equals(str1);
 
-    //Les dues sentències són equivalents; no importa quina variable s'utilitza primer, str1 o str2, ja que el resultat és el mateix
+    /*Les dues sentències són equivalents; no importa quina variable
+        s'utilitza primer, str1 o str2, ja que el resultat és el mateix*/
 ```
 
 El codi següent mostra com s'utilitza el mètode:
@@ -54,7 +55,8 @@ El codi següent mostra com s'utilitza el mètode:
     String str2 = "Bon dia, com esteu?";
     boolean areEquals;
 
-    areEquals = name1.equals(name2);        //Retornarà false (problema de majúscules minúscules)
+    areEquals = name1.equals(name2);        /*Retornarà false
+                                                (problema de majúscules minúscules)*/
     areEquals = name1.equals(name3);        //Retornarà true
     areEquals = course1.equals(course2);    //Retornarà false
     areEquals = course1.equals(course3);    //Retornarà true
