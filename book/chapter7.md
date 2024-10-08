@@ -325,3 +325,41 @@ El codi següent mostra com s'utilitzen el dos mètodes:
     fragment = str2.substring(endPos, iniPos);          //Error!
     fragment = str2.substring(0, str.length() + 10);    //Error!
 ```
+
+## Cerca dins d'un `String`
+
+### Mètode `indexOf()`
+Té 4 sobrecàrregues
+
+### Mètode `lastIndexOf()`
+Té 4 sobrecàrregues
+
+## Comprovacions sobre un `String`
+
+### Mètode `isEmpty()`
+
+### Mètode `contains()`
+
+### Mètode `startsWith()`
+Té 2 sobrecàrregues
+
+### Mètode `endsWith()`
+
+## Transformacions d'un `String`
+
+### Mètode `toLowerCase()`
+
+### Mètode `toUpperCase()`
+
+### Mètode `replace()`
+Té 3 sobrecàrregues
+
+### Mètode `strip()`
+
+### Mètode `stripLeading()`
+
+### Mètode `stripTrailing()`
+
+## Trencament d'un `String`
+
+### Mètode `split()`
