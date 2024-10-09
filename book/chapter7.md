@@ -5,7 +5,7 @@ Molts programes que tenen aquest menú característic l'implementen utilitzant l
 
 La Figura 7.1 mostra l'exemple d'un menú amb 4 opcions (la primera és la de sortir). El codi gestiona l'opció escollida i l'interacció amb l'usuari, així com també la gestió de l'error en cas que l'usuari introdueixi un valor incorrecte dins del cas `default` (cal tenir en compte que sempre s'ha de mantenir a l'usuari ben informat del que està passant, sobretot en cas d'error).
 
-{% code title="Figura 7.1: implementació d'un menú" overflow="wrap" lineNumbers="true" %}
+{% code title="Figura 7.1: implementació menú" overflow="wrap" lineNumbers="true" %}
 ```java
 import java.util.Scanner;
 
