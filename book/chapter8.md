@@ -329,10 +329,99 @@ El codi següent mostra com s'utilitzen el dos mètodes:
 ## Cerca dins d'un `String`
 
 ### Mètode `indexOf()`
-Té 4 sobrecàrregues
+El mètode `indexOf()` permet obtenir la posició on apareix, per primer cop, un caràcter o una subcadena (un fragment) dins de la cadena de caràcters principal. Aquest mètode té sis *sobrecàrregues*:
+* [`indexOf()` sobrecàrrega 1](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#indexOf(int))
+* [`indexOf()` sobrecàrrega 2](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#indexOf(int,int))
+* [`indexOf()` sobrecàrrega 3](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#indexOf(int,int,int))
+* [`indexOf()` sobrecàrrega 4](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#indexOf(java.lang.String))
+* [`indexOf()` sobrecàrrega 5](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#indexOf(java.lang.String,int))
+* [`indexOf()` sobrecàrrega 6](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#indexOf(java.lang.String,int,int))
+```java
+    int indexOf(int ch);
+    int indexOf(int ch, int iniPos);
+    int indexOf(int ch, int iniPos, int endPos);
+    int indexOf(String sbstr);
+    int indexOf(String sbstr, int iniPos);
+    int indexOf(String sbstr, int iniPos, int endPos);
+```
+Per poder obtenir la primera posició d'un caràcter o d'una subcadena dins de la cadena de caràcters principal `String str` s'ha de fer de la manera següent: `str.indexOf(parameters)`.
+
+Explicació dels paràmetres:
+* `ch`: caràcter que es vol buscar (recordeu que cada caràcter `char` té la seva representació directa en format numèric `int`)
+* `sbstr`: subcadena que es vol buscar
+* `iniPos`: posició de la cadena principal `str` a partir de la qual volem començar a buscar el caràcter `ch` o la subcadena `sbstr`
+* `endPos`: posició de la cadena principal `str` a partir de la qual volem aturar la cerca del caràcter `ch` o de la subcadena `sbstr` (no buscarem més enllà de la posició `endPos`)
+
+Explicació del retorn:
+Qualsevol d'aquestes sobrecàrregues retorna la posició de la cadena principal `str` on s'ha trobat, per primera vegada, el caràcter `ch` o la subcadena `sbstr` que s'està buscant. En cas que no s'hagi trobat, retorna `-1`.
+Cal tenir en compte que la primera posició sempre és la `0`.
+
+En les sobrecàrregues del mètode `int indexOf(int ch)` i `int indexOf(String sbstr)`, com que no s'indica ni la posició d'inici ni la de finalització, el caràcter o el fragment es busca des del principi fins al final de la cadena principal `str`. En les sobrecàrregues `int indexOf(int ch, int iniPos)` i `int indexOf(String sbstr, int iniPos)`, el caràcter o el fragment es cerca des de la posició `iniPos` fins al final de la cadena principal `str`. Finalment, en les sobrecàrregues `int indexOf(int ch, int iniPos, int endPos)` i `int indexOf(String sbstr, int iniPos, int endPos)`, el caràcter o el fragment es busca des de la posició `iniPos` fins a la posició `endPos - 1` (excloent!) de la cadena principal `str`.
+
+Cal tenir en compte que si qualsevol dels paràmetres de posició (`iniPos` o `endPos`) és incorrecte, és a dir, les posicions indicades són negatives o superiors a la llargada de la cadena principal o la posició inicial és més gran que la final, els mètodes llençaran l'excepció `StringIndexOutOfBoundsException`.
+
+El codi següent mostra com s'utilitzen el dos mètodes:
+```java
+    String str = "El meu gos es diu Loki i és negre";
+    int pos;
+
+    pos = str.indexOf('m');                         //Retornarà 3
+    pos = str.indexOf('ç');                         //Retornarà -1
+    pos = str.indexOf(' ', 8);                      //Retornarà 10
+    pos = str.indexOf('e', 15, 30);                 //Retornarà 29
+    pos = str.indexOf("Loki");                      //Retornarà 18
+    pos = str.indexOf("el");                        //Retornarà -1
+    pos = str.indexOf("El");                        //Retornarà 0
+    pos = str.indexOf("gos", 15);                   //Retornarà -1
+    pos = str.indexOf("diu", 10);                   //Retornarà 14
+    pos = str.indexOf("gre", 10, 15);               //Retornarà -1
+    pos = str.indexOf("és", 10, 30);                //Retornarà 25
+    pos = str.indexOf("gos", -10);                  //Error!
+    pos = str.indexOf("gos", 5, 100);               //Error!
+    pos = str.indexOf("gos", 30, 10);               //Error!
+```
 
 ### Mètode `lastIndexOf()`
-Té 4 sobrecàrregues
+El mètode `lastIndexOf()` és molt similar al mètode `indexOf()`, de tal manera que, en comptes d'obtenir primera la posició on apareix un caràcter o una subcadena (un fragment) dins de la cadena de caràcters principal, obté la posició on apareix per darrer cop. Té quatre *sobrecàrregues*:
+* [`lastIndexOf()` sobrecàrrega 1](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#lastIndexOf(int))
+* [`lastIndexOf()` sobrecàrrega 2](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#lastIndexOf(int,int))
+* [`lastIndexOf()` sobrecàrrega 3](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#lastIndexOf(java.lang.String))
+* [`lastIndexOf()` sobrecàrrega 4](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#lastIndexOf(java.lang.String,int))
+```java
+    int lastIndexOf(int ch);
+    int lastIndexOf(int ch, int iniPos);
+    int lastIndexOf(String sbstr);
+    int lastIndexOf(String sbstr, int iniPos);
+```
+Per poder obtenir la darrera posició d'un caràcter o d'una subcadena dins de la cadena de caràcters principal `String str` s'ha de fer de la manera següent: `str.lastIndexOf(parameters)`.
+
+Explicació dels paràmetres:
+* `ch`: caràcter que es vol buscar (recordeu que cada caràcter `char` té la seva representació directa en format numèric `int`)
+* `sbstr`: subcadena que es vol buscar
+* `iniPos`: posició de la cadena principal `str` a partir de la qual volem començar a buscar el caràcter `ch` o la subcadena `sbstr` (cal tenir en compte que la cerca és a l'inversa, des d'`iniPos` fins a l'inici de la cadena principal!)
+
+Explicació del retorn:
+Qualsevol d'aquestes sobrecàrregues retorna la posició de la cadena principal `str` on s'ha trobat, per darrera vegada, el caràcter `ch` o la subcadena `sbstr` que s'està buscant. En cas que no s'hagi trobat, retorna `-1`.
+Cal tenir en compte que la primera posició sempre és la `0`.
+
+En les sobrecàrregues del mètode `int lastIndexOf(int ch)` i `int lastIndexOf(String sbstr)`, com que no s'indica la posició d'inici de la cerca, el caràcter o el fragment es busca des del final fins al principi de la cadena principal `str`. En les sobrecàrregues `int lastIndexOf(int ch, int iniPos)` i `int lastIndexOf(String sbstr, int iniPos)`, el caràcter o el fragment es cerca des de la posició `iniPos` fins al principi de la cadena principal `str`.
+
+El codi següent mostra com s'utilitzen el dos mètodes:
+```java
+    String str = "El meu gos es diu Loki i és negre";
+    int pos;
+
+    pos = str.lastIndexOf('m');                         //Retornarà 3
+    pos = str.lastIndexOf('ç');                         //Retornarà -1
+    pos = str.lastIndexOf(' ', 8);                      //Retornarà 6
+    pos = str.lastIndexOf('e', 30);                     //Retornarà 29
+    pos = str.lastIndexOf('e', 3);                      //Retornarà -1
+    pos = str.lastIndexOf("Loki");                      //Retornarà 18
+    pos = str.lastIndexOf("el");                        //Retornarà -1
+    pos = str.lastIndexOf("El");                        //Retornarà 0
+    pos = str.lastIndexOf("gos", 15);                   //Retornarà 7
+    pos = str.lastIndexOf("diu", 10);                   //Retornarà -1
+```
 
 ## Comprovacions sobre un `String`
 
