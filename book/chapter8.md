@@ -352,8 +352,7 @@ Explicació dels paràmetres:
 * `iniPos`: posició de la cadena principal `str` a partir de la qual volem començar a buscar el caràcter `ch` o la subcadena `sbstr`
 * `endPos`: posició de la cadena principal `str` a partir de la qual volem aturar la cerca del caràcter `ch` o de la subcadena `sbstr` (no buscarem més enllà de la posició `endPos`)
 
-Explicació del retorn:
-Qualsevol d'aquestes sobrecàrregues retorna la posició de la cadena principal `str` on s'ha trobat, per primera vegada, el caràcter `ch` o la subcadena `sbstr` que s'està buscant. En cas que no s'hagi trobat, retorna `-1`.
+Explicació del retorn: qualsevol d'aquestes sobrecàrregues retorna la posició de la cadena principal `str` on s'ha trobat, per primera vegada, el caràcter `ch` o la subcadena `sbstr` que s'està buscant. En cas que no s'hagi trobat, retorna `-1`.
 Cal tenir en compte que la primera posició sempre és la `0`.
 
 En les sobrecàrregues del mètode `int indexOf(int ch)` i `int indexOf(String sbstr)`, com que no s'indica ni la posició d'inici ni la de finalització, el caràcter o el fragment es busca des del principi fins al final de la cadena principal `str`. En les sobrecàrregues `int indexOf(int ch, int iniPos)` i `int indexOf(String sbstr, int iniPos)`, el caràcter o el fragment es cerca des de la posició `iniPos` fins al final de la cadena principal `str`. Finalment, en les sobrecàrregues `int indexOf(int ch, int iniPos, int endPos)` i `int indexOf(String sbstr, int iniPos, int endPos)`, el caràcter o el fragment es busca des de la posició `iniPos` fins a la posició `endPos - 1` (excloent!) de la cadena principal `str`.
@@ -400,8 +399,7 @@ Explicació dels paràmetres:
 * `sbstr`: subcadena que es vol buscar
 * `iniPos`: posició de la cadena principal `str` a partir de la qual volem començar a buscar el caràcter `ch` o la subcadena `sbstr` (cal tenir en compte que la cerca és a l'inversa, des d'`iniPos` fins a l'inici de la cadena principal!)
 
-Explicació del retorn:
-Qualsevol d'aquestes sobrecàrregues retorna la posició de la cadena principal `str` on s'ha trobat, per darrera vegada, el caràcter `ch` o la subcadena `sbstr` que s'està buscant. En cas que no s'hagi trobat, retorna `-1`.
+Explicació del retorn: qualsevol d'aquestes sobrecàrregues retorna la posició de la cadena principal `str` on s'ha trobat, per darrera vegada, el caràcter `ch` o la subcadena `sbstr` que s'està buscant. En cas que no s'hagi trobat, retorna `-1`.
 Cal tenir en compte que la primera posició sempre és la `0`.
 
 En les sobrecàrregues del mètode `int lastIndexOf(int ch)` i `int lastIndexOf(String sbstr)`, com que no s'indica la posició d'inici de la cerca, el caràcter o el fragment es busca des del final fins al principi de la cadena principal `str`. En les sobrecàrregues `int lastIndexOf(int ch, int iniPos)` i `int lastIndexOf(String sbstr, int iniPos)`, el caràcter o el fragment es cerca des de la posició `iniPos` fins al principi de la cadena principal `str`.
@@ -425,20 +423,175 @@ El codi següent mostra com s'utilitzen el dos mètodes:
 
 ## Comprovacions sobre un `String`
 
+### Mètode `isBlank()`
+El mètode [`isBlank()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#isBlank()) comprova si la cadena de caràcters està buida o només conté *espais en blanc*, entenent com a espais en blanc tots els llistats en aquest [enllaç](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Character.html#isWhitespace(int)); en el cas que ens ocupa, comprova si la cadena de caracters està buida o si només conté espais (`' '`), tabuladors (`'\t'`) i salts de línia (`'\n'`).
+```java
+    boolean isBlank();
+```
+En cas que la cadena que estem consultant sigui buida o només contingui espais, el mètode retorna `true`; en cas contrari, retorna `false`. Per poder utilitzar aquest mètode sobre una variable (o constant) de tipus `String str` s'ha de fer de la manera següent: `str.isBlank()`
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str1 = "M.Àngels";
+    String str2 = "\t";
+    String str3 = "        ";
+    String str4 = "\n";
+    String str5 = "\t\t\n   \t";
+    String str6 = "\t\t\n  a \t";
+    boolean isBlankString;
+
+    isBlankString = str1.isBlank();     //Retornarà false
+    isBlankString = str2.isBlank();     //Retornarà true
+    isBlankString = str3.isBlank();     //Retornarà true
+    isBlankString = str4.isBlank();     //Retornarà true
+    isBlankString = str5.isBlank();     //Retornarà true
+    isBlankString = str6.isBlank();     //Retornarà false
+```
+
 ### Mètode `isEmpty()`
+El mètode [`isEmpty()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#isEmpty()) comprova si la cadena de caràcters està completament buida, és a dir, si la seva longitud és 0.
+```java
+    boolean isEmpty();
+```
+En cas que la cadena que estem consultant sigui buida, el mètode retorna `true`; en cas contrari, retorna `false`. Per poder utilitzar aquest mètode sobre una variable (o constant) de tipus `String str` s'ha de fer de la manera següent: `str.isEmpty()`
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str1 = "M.Àngels";
+    String str2 = "\t";
+    String str3 = "        ";
+    String str4 = "\n";
+    String str5 = "\t\t\n   \t";
+    String str6 = "\t\t\n  a \t";
+    String str7 = "";
+    boolean isEmptyString;
+
+    isEmptyString = str1.isEmpty();     //Retornarà false
+    isEmptyString = str2.isEmpty();     //Retornarà false
+    isEmptyString = str3.isEmpty();     //Retornarà false
+    isEmptyString = str4.isEmpty();     //Retornarà false
+    isEmptyString = str5.isEmpty();     //Retornarà false
+    isEmptyString = str6.isEmpty();     //Retornarà false
+    isEmptyString = str7.isEmpty();     //Retornarà true
+```
 
 ### Mètode `contains()`
+El mètode [`contains()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#contains(java.lang.CharSequence)) comprova si la cadena de caràcters que s'està analitzant conté una subcadena en concret.
+```java
+    boolean contains(CharSequence seq);
+```
+En cas que la cadena que estem consultant contingui la subcadena, el mètode retorna `true`; en cas contrari, retorna `false`. Cal tenir en compte, però, que el mètode és *case-sensitive* i, per tant, té en compte les majúscules i les minúscules.
+
+Per poder utilitzar aquest mètode sobre una variable (o constant) de tipus `String str` i saber si la subcadena `CharSequence seq` hi està continguda o no s'ha de fer de la manera següent: `str.contains(seq)`
+
+Explicació dels paràmetres:
+* `seq`: subcadena de caràcters que es vol buscar dins de la cadena principal `str`. Aquesta subcadena és de tipus `CharSequence`, però a efectes pràctics acaba essent un `String`.
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str1 = "El meu gos es diu Loki i és negre";
+    String str2 = "GOS";
+    String str3 = "Loki";
+    boolean inside;
+
+    inside = str1.contains(str2);       //Retornarà false
+    inside = str1.contains(str3);       //Retornarà true
+    inside = str1.contains("@");        //Retornarà false
+    inside = str1.contains("oki i és"); //Retornarà true
+```
 
 ### Mètode `startsWith()`
-Té 2 sobrecàrregues
+El mètode `startsWith()` permet saber si una cadena de caràcters comença, o no, amb una subcadena (un fragment) determinat. Aquest mètode té dues *sobrecàrregues*:
+* [`startsWith()` sobrecàrrega 1](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#startsWith(java.lang.String))
+* [`startsWith()` sobrecàrrega 2](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#startsWith(java.lang.String,int))
+```java
+    boolean startsWith(String sbstr);
+    boolean startsWith(String sbstr, int iniPos);
+```
+Per poder saber si una variable (o constant) de tipus `String str` comença amb una subcadena determinada s'ha de fer de la manera següent: `str.startsWith(parameters)`. Cal tenir en compte, a més a més, que el mètode és *case-sensitive* i, per tant, té en compte majúscules i minúscules.
+
+Explicació dels paràmetres:
+* `sbstr`: la subcadena que volem comprovar si es troba, o no, a l'inici de la cadena de caràcters principal `str` 
+* `iniPos`: posició de la cadena `str` on volem comprocar si comença el fragment `sbstr`
+
+La primera sobrecàrrega del mètode (`boolean startsWith(String sbstr)`), com que no indica la posició inicial, només retornarà `true` si el fragment `sbstr` es troba a l'inici de la cadena principal `str`. En canvi, la segona sobrecàrrega (`boolean startsWith(String sbstr, int iniPos)`) només retornarà `true` si el fragment `sbstr` es troba a la posició `iniPos` de la cadena principal.
+
+El codi següent mostra com s'utilitzen el dos mètodes:
+```java
+    String str1 = "El meu gos es diu Loki i és negre";
+    String str2 = "El";
+    String str3 = "el";
+    boolean isStarting;
+    int iniPos;
+
+    isStarting = str1.startsWidth(str2);                    //Retornarà true
+    isStarting = str1.startsWidth(str3);                    //Retornarà false (el mètode és case-sensitive)
+    isStarting = str1.startsWidth("Loki", 18);              //Retornarà true
+    isStarting = str1.startsWidth("loki", 18);              //Retornarà false (el mètode és case-sensitive)
+    isStarting = str1.startsWidth("Loki", -1);              //Retornarà false (posició fora de rang)
+    isStarting = str1.startsWidth("Loki", 100);             //Retornarà false (posició fora de rang)
+    isStarting = str1.startsWidth("i", 15);                 //Retornarà true
+    isStarting = str1.startsWidth("os es di", 8);           //Retornarà true
+```
 
 ### Mètode `endsWith()`
+El mètode [`endsWith()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#endsWith(java.lang.String)) permet saber si una cadena de caràcters acaba, o no, amb una subcadena (un fragment) determinat
+```java
+    boolean endsWith(String sbstr);
+```
+Per poder saber si una variable (o constant) de tipus `String str` acaba amb una subcadena `String sbstr` determinada s'ha de fer de la manera següent: `str.endsWith(sbstr)`. Cal tenir en compte, a més a més, que el mètode és *case-sensitive* i, per tant, té en compte majúscules i minúscules.
+
+Explicació dels paràmetres:
+* `sbstr`: la subcadena que volem comprovar si es troba, o no, a al final de la cadena de caràcters principal `str` 
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str1 = "El meu gos es diu Loki i és negre";
+    String str2 = "negre";
+    String str3 = "neGre";
+    boolean isEnding;
+
+    isEnding = str1.endsWith(str2);         //Retornarà true
+    isEnding = str1.endsWith(str3);         //Retornarà false (el mètode és case-sensitive)
+    isEnding = str1.endsWith("negr");       //Retornarà false
+    isEnding = str1.endsWith("@dilluns!");  //Retornarà false
+```
 
 ## Transformacions d'un `String`
 
 ### Mètode `toLowerCase()`
+El mètode [`toLowerCase()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#toLowerCase()) transforma la cadena de tal manera que tots els seus caràcters passen a estar en minúscules.
+```java
+    String toLowerCase();
+```
+Per poder transformar una variable (o constant) de tipus `String str` per tal que tingui tots els seus caràcters en minúscula s'ha de fer de la manera següent: `str.toLowerCase()`
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str1 = "El meu gos es diu Loki";
+    String str2 = "AbfEdE1@#";
+    String res;
+
+    res = str1.toLowerCase();       //Retornarà "el meu gos es diu loki"
+    res = str2.toLowerCase();       //Retornarà "abfede1@#"
+```
 
 ### Mètode `toUpperCase()`
+El mètode [`toUpperCase()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#toUpperCase()) transforma la cadena de tal manera que tots els seus caràcters passen a estar en majúscules.
+```java
+    String toUpperCase();
+```
+Per poder transformar una variable (o constant) de tipus `String str` per tal que tingui tots els seus caràcters en majúscula s'ha de fer de la manera següent: `str.toUpperCase()`
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str1 = "El meu gos es diu Loki";
+    String str2 = "AbfEdE1@#";
+    String res;
+
+    res = str1.toUpperCase();       //Retornarà "EL MEU GOS ES DIU LOKI"
+    res = str2.toUpperCase();       //Retornarà "ABFEDE1@#"
+```
 
 ### Mètode `replace()`
 Té 3 sobrecàrregues
