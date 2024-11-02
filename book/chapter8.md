@@ -776,7 +776,7 @@ Tots aquests mètode són `static`, això significa que, per poder-los utilitzar
 
 El codi següent mostra com s'utilitzen el dos mètodes:
 ```java
-    String res
+    String res;
     char vowels = ['a', 'e', 'i', 'o', 'u'];
 
     res = String.valueOf(true);             //Retornarà "true"
