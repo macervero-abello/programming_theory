@@ -327,6 +327,7 @@ El codi següent mostra com s'utilitzen el dos mètodes:
 ```
 
 ## Cerca dins d'un `String`
+Donada una variable (o constant) de tipus `String`, es poden cercar subcadenes i saber si s'han trobat i, fins i tot, en quina posició s'han trobat.
 
 ### Mètode `indexOf()`
 El mètode `indexOf()` permet obtenir la posició on apareix, per primer cop, un caràcter o una subcadena (un fragment) dins de la cadena de caràcters principal. Aquest mètode té sis *sobrecàrregues*:
@@ -422,6 +423,7 @@ El codi següent mostra com s'utilitzen el dos mètodes:
 ```
 
 ## Comprovacions sobre un `String`
+Donada una variable (o constant) de tipus `String`, es poden realitzar diverses comprovacions sobre la seva composició, com per exemple, si és una cadena buida o si comença o acaba amb una determinada subcadena.
 
 ### Mètode `isBlank()`
 El mètode [`isBlank()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#isBlank()) comprova si la cadena de caràcters està buida o només conté *espais en blanc*, entenent com a espais en blanc tots els llistats en aquest [enllaç](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Character.html#isWhitespace(int)); en el cas que ens ocupa, comprova si la cadena de caracters està buida o si només conté espais (`' '`), tabuladors (`'\t'`) i salts de línia (`'\n'`).
@@ -558,6 +560,7 @@ El codi següent mostra com s'utilitza el mètode:
 ```
 
 ## Transformacions d'un `String`
+Donada una variable (o constant) de tipus `String`, se li poden aplicar múltiples transformacions, com per exemple, traspassar tots els seus caràcters a majúscules o minúscules, eliminar els espais en blanc sobrants del principi o del final, etc.
 
 ### Mètode `toLowerCase()`
 El mètode [`toLowerCase()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#toLowerCase()) transforma la cadena de tal manera que tots els seus caràcters passen a estar en minúscules.
@@ -594,14 +597,193 @@ El codi següent mostra com s'utilitza el mètode:
 ```
 
 ### Mètode `replace()`
-Té 3 sobrecàrregues
+El mètode [`replace()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#replace(java.lang.CharSequence,java.lang.CharSequence)) substitueix un conjunt de caràcters de la cadena principal per un altre conjunt de caràcters.
+```java
+    String replace(CharSequence oldSbstr, CharSequence newSbstr);
+```
+Per poder fer la substitució de caràcters una variable (o constant) de tipus `String str` s'ha de fer de la manera següent: `str.replace(oldSbstr, newSbstr)`.
+
+Explicació dels paràmetres:
+* `oldSbstr`: els caràcters de la cadena principal `str` que volem substituir
+* `newSbstr`: els nous caràcters pels quals volem substituir els vells
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str = "El meu gos es diu Loki";
+    String oldSbstr = "Loki";
+    String newSbstr = "Thor";
+    String res;
+
+    res = str.replace(oldSbstr, newSbstr);      //Retornarà "El meu gos es diu Thor"
+    res = str.replace(" ", "_");                //Retornarà "El_meu_gos_es_diu_Loki"
+```
+
+### Mètode `replaceAll()`
+El mètode [`replaceAll()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#replaceAll(java.lang.String,java.lang.String)) funciona exactament igual que el mètode `replace()` que s'ha explicat just a sobre d'aquestes línies. L'única diferència és que el primer paràmetre, que fa referència als caràcters de la cadena principal que es volen substituir, poden ser un patró regular (atenció, els patrons regulars es veuran en capítols posteriors)
+```java
+    String replaceAll(String regex, String newSbstr);
+```
+Per poder fer la substitució de caràcters una variable (o constant) de tipus `String str` s'ha de fer de la manera següent: `str.replace(regex, newSbstr)`.
+
+Explicació dels paràmetres:
+* `regex`: els caràcters de la cadena principal `str` que volem substituir (o un patró regular)
+* `newSbstr`: els nous caràcters pels quals volem substituir els vells
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str = "El meu gos es diu Loki";
+    String oldSbstr = "Loki";
+    String newSbstr = "Thor";
+    String res;
+
+    res = str.replace(oldSbstr, newSbstr);      //Retornarà "El meu gos es diu Thor"
+    res = str.replace(" ", "_");                //Retornarà "El_meu_gos_es_diu_Loki"
+```
+
+### Mètode `replaceFirst()`
+El mètode [`replaceFirst()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#replaceFirst(java.lang.String,java.lang.String)) funciona exactament igual que el mètode `replaceAll()` que s'ha explicat just a sobre d'aquestes línies, però tenint en compte que només fa 1 única substitució, és a dir, només fa el canvi el primer cop que troba la subcadena (o el patró regular) indicada pel primer paràmetre. 
+```java
+    String replaceFirst(String regex, String newSbstr);
+```
+Per poder fer la substitució de caràcters una variable (o constant) de tipus `String str` s'ha de fer de la manera següent: `str.replace(regex, newSbstr)`.
+
+Explicació dels paràmetres:
+* `regex`: els caràcters de la cadena principal `str` que volem substituir (o un patró regular)
+* `newSbstr`: els nous caràcters pels quals volem substituir els vells
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str = "El meu gos es diu Loki";
+    String oldSbstr = "Loki";
+    String newSbstr = "Thor";
+    String res;
+
+    res = str.replace(oldSbstr, newSbstr);      //Retornarà "El meu gos es diu Thor"
+    res = str.replace(" ", "_");                //Retornarà "El_meu gos es diu Loki"
+    res = str.replace("e", "#");                //Retornarà "El m#u gos es diu Loki"
+```
 
 ### Mètode `strip()`
+El mètode [`strip()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#strip()) eliminia tots els *espais en blanc* davant i darrere d'una cadena de caràcters, entenent com a espais en blanc tots els llistats en aquest [enllaç](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Character.html#isWhitespace(int)); en el cas que ens ocupa, s'entrendrà que els espais en blanc són els espais en si mateixos (`' '`), els tabuladors (`'\t'`) i els salts de línia (`'\n'`).
+```java
+    String strip();
+```
+Per poder eliminar els espais en blanc del davant i del darrere d'una variable (o constant) de tipus `String str` s'ha de fer de la manera següent: `str.strip()`
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String name = "    M.Àngels\n";
+    String course = "\tDAM 1\t\n    ";
+    String res;
+
+    res = name.strip();         //Retornarà "M.Àngels"
+    res = course.strip();       //Retornarà "DAM 1"
+```
 
 ### Mètode `stripLeading()`
+El mètode [`stripLeading()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#stripLeading()) funciona exactament igual que el mètode `strip()` anterior, però només eliminia els *espais en blanc* del davant d'una cadena de caràcters.
+```java
+    String stripLeading();
+```
+Per poder eliminar els espais en blanc del davant d'una variable (o constant) de tipus `String str` s'ha de fer de la manera següent: `str.stripLeading()`
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String name = "    M.Àngels\n";
+    String course = "\tDAM 1\t\n    ";
+    String res;
+
+    res = name.stripLeading();          //Retornarà "M.Àngels\n"
+    res = course.stripLeading();        //Retornarà "DAM 1\t\n    "
+```
 
 ### Mètode `stripTrailing()`
+El mètode [`stripTrailing()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#stripTrailing()) funciona exactament igual que el mètode `strip()` anterior, però només eliminia els *espais en blanc* del darrere d'una cadena de caràcters.
+```java
+    String stripTrailing();
+```
+Per poder eliminar els espais en blanc del davant d'una variable (o constant) de tipus `String str` s'ha de fer de la manera següent: `str.stripTrailing()`
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String name = "    M.Àngels\n";
+    String course = "\tDAM 1\t\n    ";
+    String res;
+
+    res = name.stripTrailing();         //Retornarà "    M.Àngels"
+    res = course.stripTrailing();       //Retornarà "\tDAM 1"
+```
 
 ## Trencament d'un `String`
+Per poder *trencar* una cadena de caràcters `String` s'utilitza el mètode [`split()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#split(java.lang.String)).
+```java
+    String[] split(String regex);
+```
+Per poder saber la longitud d'una variable (o constant) de tipus `String str` el mètode `split()`s'ha d'utilitzar de la manera següent: `str.split(regex)`.
 
-### Mètode `split()`
+Explicació dels paràmetres:
+* `regex`: els caràcters (o un patró regular) de la cadena principal `str` que s'utilitzaran per poder-la trencar
+
+Explicació del retorn: aquest mètode retorna un *array* d'`String`, és a dir, una llista d'`String`on cada element és un tros dels obtinguts a partir del trencament de la cadena principal.
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str = "El meu gos es diu Loki";
+    String res[];
+
+    res = str.split(" ");       //Retornarà l'array ["El", "meu", "gos", "es", "diu", "Loki"], el qual té 6 elements, és a dir, res.length és 6
+    res = str.split("e");       //Retornarà l'array ["El m", "u gos ", "s diu Loki"], el qual té 3 elements, és a dir, res.length és 3
+```
+
+## Creació d'un `String` a partir de la repetició d'un conjunt de caràcters
+Per poder crear una cadena de caràcters `String` a partir de la repetició d'un conjunt de caràcters s'utilitza el mètode [`repeat()`](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#repeat(int)).
+```java
+    String repeat(int count);
+```
+Per poder crear la cadena de caràcters `String res` a partir de la repetició d'un conjunt d'elements definits per una variable (o constant) de tipus `String str` el mètode `repeat()`s'ha d'utilitzar de la manera següent: `res = str.repeat(count)`. Cal tenir en compte que si `count` és un número negatiu, el mètode llençarà l'excepció `IllegalArgumentException`.
+
+Explicació dels paràmetres:
+* `count`: nombre de vegades que es vol repetir el patró definit per la cadena `str` per poder crear la cadena `res`
+
+El codi següent mostra com s'utilitza el mètode:
+```java
+    String str = "ab ";
+    int count = 10
+    String res;
+
+    res = str.repeat(count);        //Retornarà "ab ab ab ab ab ab ab ab ab ab ";
+```
+
+## Transformació d'una variable de qualsevol tipus primitiu a la seva representació `String`
+Per poder representar el valor de qualsevol tipus primitiu mitjançant un `String` s'utilitza el mètode `valueOf()`, el qual té 9 *sobrecàrregues*, de les quals només n'estudiarem 7:
+* [`valueOf()` sobrecàrrega 1](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#valueOf(boolean))
+* [`valueOf()` sobrecàrrega 2](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#valueOf(char))
+* [`valueOf()` sobrecàrrega 3](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#valueOf(char[]))
+* [`valueOf()` sobrecàrrega 4](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#valueOf(int))
+* [`valueOf()` sobrecàrrega 5](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#valueOf(long))
+* [`valueOf()` sobrecàrrega 6](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#valueOf(float))
+* [`valueOf()` sobrecàrrega 7](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html#valueOf(double))
+```java
+    static String valueOf(boolean data);
+    static String valueOf(char data);
+    static String valueOf(char data[]);
+    static String valueOf(int data);
+    static String valueOf(long data);
+    static String valueOf(float data);
+    static String valueOf(double data);
+```
+Tots aquests mètode són `static`, això significa que, per poder-los utilitzar, no s'ha de crear cap variable de tipus `String`, sinó que s'invoca (es crida) directament sobre el propi tipus `String`. Així doncs, per poder transformar un tipus primitiu a la seva representació `String str` s'ha de fer de la manera següent: `str = String.valueOf(data)`.
+
+El codi següent mostra com s'utilitzen el dos mètodes:
+```java
+    String res
+    char vowels = ['a', 'e', 'i', 'o', 'u'];
+
+    res = String.valueOf(true);             //Retornarà "true"
+    res = String.valueOf('c');              //Retornarà "c"
+    res = String.valueOf(vowels);           //Retornarà "aeiou"
+    res = String.valueOf(10);               //Retornarà "10"
+    res = String.valueOf(92392829835);      //Retornarà "92392829835"
+    res = String.valueOf(3.5f);             //Retornarà "3.5"
+    res = String.valueOf(-8.872785468);     //Retornarà "-8.872785468"
+```
