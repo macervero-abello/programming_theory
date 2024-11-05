@@ -1,0 +1,1 @@
+# Generació de seqüències de nombres aleatoris: la classe `Random`
