@@ -13,6 +13,8 @@ L'anàlisi del programa principal i la seva divisió en mòduls també es pot an
 ## Programa principal: la funció o procediment `main`
 Tal com ja sabem, tot programa ha de definir el seu procés prinipal, que és el seu punt d'entrada. Aquest procés ha de ser únic i, en molts llenguatges de programació, es defineix com una funció o procediment especial que s'anomena `main`.
 
+Podem dir que el `main` conté l'esquelet del programa, el qual ha de ser fàcil de seguir i llegir, i utilitza les funcions i els procediments per implementar les diverses funcionalitats requerides.
+
 ## Funcions i procediments
 Les funcions i els procediments són **blocs de codi** que permeten implementar un algorisme (una tasca) molt específica i que tenen unes característiques especials:
 * Són **independents**, és a dir, no estan situats dins del programa principal, sinó que s'implementen fora
@@ -21,3 +23,38 @@ Les funcions i els procediments són **blocs de codi** que permeten implementar 
 * S'encarreguen d'implementar algorismes, és a dir, de **fer càlculs i retornar resultats**, per tant, en cap moment gestionaran la interacció amb l'usuari; aquesta interacció sempre s'implementarà dins del programa principal
 * Poden rebre dades d'entrada, anomenades **paràmetres**, que són les que necessitaran per poder dur a terme els càlculs que han d'implementar
 * Poden **retornar valors**
+
+### Sintaxi bàsica d'una funció o d'un procediment
+Les funcions i els procediments estan formats per una **capçalera** i un **cos**, de tal manera que:
+* Capçalera: defineix el nom de la funció o procediment, les dades d'entrada que rep (paràmetres) i les dades que retorna; també es pot anomenar *signatura* o *prototipus*.
+* Cos: és el bloc de codi, el conjunt d'instruccions, que s'han d'executar cada cop que s'invoca la funció o el procediment.
+
+El codi següent mostra, de manera esquemàtica, la sintaxi, és a dir, l'aspecte que tenen totes les funcions i els procediments. Cal tenir en compte, però, que aquesta sintaxi és específica per aquelles funcions i procediments JAVA que s'implementen dins del mateix fitxer del programa principal, és a dir, dins del mateix fitxer on es troba el `main`. En capítols posteriors es veurà que la capçalera pot variar lleugerament.
+```java
+    //Capçalera
+    static public/private tipus_retorn nomFunció(tipus_parametre1 nomParametre1, tipus_parametre2 nomParametre2) {
+        /**
+         * Cos
+         * Instruccions que s'han d'executar cada cop que s'invoca la funció o el procediment
+         */
+
+        /**
+         * En cas que calgui retornar un valor, l'última instrucció sempre serà la següent:
+         * return valor;
+         */
+    }
+```
+Explicació dels elements de la capçalera:
+* Paraula `static`: ja sabem que, en JAVA, el `main` porta l'etiqueta `static` al capdavant, la qual cosa està, en certa manera, relacionada amb el fet que només pot existir un únic `main` per cada programa que s'implementi. Amb la resta de funcions i procediments que s'han de cridar (invocar) des del `main` passa una cosa similar: per una banda, també han de ser úniques (no pot haver dos procediments o funcions amb el mateix nom) i, per l'altra, com que el `main` és `static`, tota funció o procediment que s'hagi de cridar dins del teu codi també ha de ser `static`.
+En captítols posteriors s'acabarà d'explicar en profunditat què significa, realment, que una funció o un procediment sigui `static` i quines implicacions té.
+* Paraula `public` o `private`: tot i que aquestes paraules clau també s'explicaran en més profunditat en capítols posteriors, en termes generals podem dir que si una funció o procediment és `public` significa que es pot invocar des de qualsevol lloc i, específicament, es pot invocar des de funcions implementades en altres fitxers o des de l'exterior. Com que el `main` és el punt d'entrada (el procés principal) de tot programa, s'ha de poder invocar des de l'exterior (des d'un terminal, per exemple) i, per tant, ha de ser `public`. En canvi, si una funció o procediment és `private` significa que només es pot invocar des d'altres funcions i procediments implementats dins del mateix fitxer.
+En el punt d'aprenentatge actual, com que totes les funcions i procediments s'implementaran dins del mateix fitxer del `main` amb l'objectiu que només es puguin invocar des d'aquest `main` o des d'altres funcions i procediments del mateix fitxer, la paraula clau `private` és preferible a la paraula clau `public`.
+* Tipus de retorn: la única diferència entre les funcions i els procediments recau en el fet de si retornen valors o no. Els procediments no retornen res, per tant, el seu tipus de retorn serà `void` (nul, res, buit). Les funcions, en canvi, retornen valors i, per tant, el seu tipus de retorn pot ser qualsevol que es necessiti (`int`, `char`, `String`, `boolean`, `Integer`, etc.). Lligat a aquest fet cal tenir en compte que l'última instrucció que haurà d'executar una funció és un `return` (s'explicarà amb més profunditat més endavant).
+* Nom de la funció (o procediment): el nom de tota funció i procediment ha de ser únic (en capítols posteriors veurem que hi ha algunes excepcions) i ha de complir exactament les mateixes normes que els noms de les variables:
+  1. **Ha de ser únics**
+  2. Ha d'estar **relacionat amb l'algorisme que implementa** la funció o el procediment
+  3. Com que el llenguatge **Java és *case-sensitive***, s'ha de **distingir minúcules i majúscules**
+  4. **Poden contenir lletres, números i subguions (`_`)**, però mai poden contenir caràcters especials (accents, espais en blanc, lletres especials com la `ñ` o la `ç`, símbols com `!`, `)`, etc.)
+  5. Sempre han de **començar amb una lletra o un subguió** (main poden començar amb un número)
+  6. Sempre han de **començar en minúscules**; la resta del nom es pot fer utilitzant *camel-case* (posant en majúscula les primeres lletes de les diverses paraules que componen el nom) o unint les diverses paraules amb subguions, tot dependrà de l'estil propi del programador. 
+  7. **No es poden utilitzar les paraules reservades** del llenguatge per definir el nom
