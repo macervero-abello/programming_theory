@@ -90,6 +90,38 @@ Exemplificacions:
 ```
 
 ### Crida d'una funció o d'un procediment
+Un cop definida o implementada una funció o un procediment utilitzant la sintaxi de l'apartat anterior cal fer-ne ús per tal que el codi que conté es pugui executar. Per aconseguir-ho, aquesta funció o aquest procediment s'ha de *cridar*, sigui des del procediment `main`, sigui des d'una altra funció o procediment.
+
+La **crida** d'una funció, que també es pot dir *invocació*, és aquella instrucció que, en exercutar-se, permet accedir al codi intern de la funció o procediment per executar-lo i, un cop executat, retornar al mateix punt de la crida per continuar executant el codi principal.
+
+Per poder cridar una funció o un procediment en cap conéixer la seva capçalera (o signatura) ja que la invocació consisteix en utilitzar el nom de la funció o mètode seguit dels parèntesis amb el llistat de tots els paràmetres que necessita (només els valors, sense els tipus).
+
+Exemplificacions:
+{% code title="Exemple de la crida d'una funció amb 1 paràmetre" overflow="wrap" lineNumbers="true" %}
+```java
+    static public void main(String args[]) {
+        Scanner keyboard = new Scanner(System.in);
+        String name, surname1;
+
+        System.out.print("Introdueix el nom complet d'una persona (nom i cognoms): ");
+        name = keyboard.nextLine();
+
+        surname1 = getFirstSurname(name);       //Crida a la funció getFirstName()
+
+        System.out.println("El primer cognom d'aquesta persona és " + surname1);
+    }
+
+    static private String getFirstSurname(String name) {
+        String breakName[] = name.split(" ");
+        return breakName[1];
+    }
+```
+{% endcode %}
+
+![Figura 11.1: Diagrama d'execució de l'exemple anterior](img/function.png)
+
+La Figura 11.1 mostra com s'executa el codi mostrat en l'exemple anterior. Podem veure que primer s'inicia l'execució del procediment `main`; quan aquest procediment arriba a la invocació de la funció `getFirstSurname()` la seva execució queda congelada i es passa a executar el codi de la funció. Finalment, quan la funció acaba, l'execució retorna al punt de la crida, retornant el valor calculat dins de la funció i emmagatzemant-lo a la variable `surname1`. A partir d'aquí, l'execució del `main` continua amb normalitat fins a la seva finalització.
+
 
 ### Pas de paràmetres
 #### Pas de paràmetres per valor
