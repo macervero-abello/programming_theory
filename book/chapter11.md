@@ -58,3 +58,39 @@ En el punt d'aprenentatge actual, com que totes les funcions i procediments s'im
   5. Sempre han de **començar amb una lletra o un subguió** (main poden començar amb un número)
   6. Sempre han de **començar en minúscules**; la resta del nom es pot fer utilitzant *camel-case* (posant en majúscula les primeres lletes de les diverses paraules que componen el nom) o unint les diverses paraules amb subguions, tot dependrà de l'estil propi del programador. 
   7. **No es poden utilitzar les paraules reservades** del llenguatge per definir el nom
+* Paràmetres: cada funció o procediment pot rebre un conjunt de paràmetres, que són les dades d'entrada que necessita per poder fer els càlculs. Aquest paràmetres es defineixen entre els parèntesis que es posen tot seguit del nom de la funció o procediment i s'especifíquen com un llistat separat per comes (,) on cada element ha d'indicar el tipus del paràmetre i un nom (aquest nom ha de complir les mateixes normes que els noms de les variables). Si una funció o un procediment no rep cap paràmetre, els parèntesis es deixen buits.
+
+Exemplificacions:
+```java
+    //El punt d'entrada main és un procediment static i public que només rep 1 únic paràmetre, un array d'Strings:
+    static public void main(String args[]) {
+        //Codi main
+    }
+
+    //Procediment static i private que no rep cap paràmetre:
+    static private void proc1() {
+        //Codi proc1
+    }
+
+    //Funció static i private que retorna un enter i que no rep cap paràmetre:
+    static private int func1() {
+        int value = 10;
+        //Codi func1
+
+        return value;
+    }
+
+    //Funció static i private que retorna un String i que no rep dos paràmetres:
+    static private String func2(String name, int age) {
+        String firstSurname;
+        //Codi func2
+
+        return firstSurname;
+    }
+```
+
+### Crida d'una funció o d'un procediment
+
+### Pas de paràmetres
+#### Pas de paràmetres per valor
+#### Pas de paràmetres per referència
