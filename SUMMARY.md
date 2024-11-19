@@ -12,3 +12,4 @@
 * [Capítol 9. Tipus complexos bàsics](book/chapter9.md)
 * [Capítol 10. Generació de seqüències de nombres aleatoris: la classe `Random`](book/chapter10.md)
 * [Capítol 11. Control de flux modular](book/chapter11.md)
+* [Capítol 12. *Arrays*](book/chapter12.md)

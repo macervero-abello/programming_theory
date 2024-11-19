@@ -18,6 +18,7 @@ Els continguts d'aquesta guia expliquen els conceptes de programació basant els
 
 ### Activitat 2. Estructures de control de flux modular: funcions i procediments
 * [Capítol 11. Control de flux modular](book/chapter11.md)
+* [Capítol 12. *Arrays*](book/chapter12.md)
 
 
 ## Llicència
