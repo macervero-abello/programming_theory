@@ -99,3 +99,59 @@ Si continuem fent el resseguiment de l'*array* `nums`, la Figura 12.8 mostra qu�
 
 ### Inicialització dels elements d'un *array*
 Per tal d'inicialitzar els elements d'un *array* cal tenir en compte que, prèviament, se n'ha hagut de definir la seva capacitat. En cas contrari, el programa llençarà un `NullPointerException`.
+
+La inicialització es pot fer de dues maneres:
+1. Utilitzant l'operador `{}`, el qual permet inicialitzar la capacitat i els elements de l'*array* d'un sol cop
+2. Utilitzant l'operador `[]` per inicialitzar, posició a posició, cadascun dels elements de l'*array* un cop ja se n'ha definit la capacitat.
+
+Cal tenir en compte que, en informàtica, l'accés a les posicions d'un *array* sempre comença pel 0, és a dir,
+* el primer element es trobarà a la posició 0;
+* el segon element es trobarà a la posició 1;
+* el tercer element es trobarà a la posició 2 i
+* i així successivament.
+Molts cops, aquesta *posició* també s'anomena l'*índex* de l'*array*.
+
+La Figura 12.9 mostra, de manera esquemàtica, l'ús de tots dos operadors (`{}` i `[]`) per inicialitzar els valors emmagatzemats dins d'un array. En canvi, la Figura 12.10 mostra un exemple de codi real
+
+{% code title="Figura 12.9: inicialització dels valors d'un *array*" %}
+```java
+    //Operador {}: inicialitza capacitat i valors interns a la vegada
+    tipus_dades []nom_array1 = {valor1, valor2, valor3, ...};
+    tipus_dades nom_array2[] = {valor1, valor2, valor3, ...};
+
+    //Operador d'accés per posició []: inicialitza el valor per cada posició de manera individual
+    tipus_dades []nom_array3 = new tipus_dades[capacitat];
+    nom_array3[0] = valor1;
+    nom_array3[1] = valor2;
+    nom_array3[2] = valor3;
+    //...
+
+    tipus_dades nom_array4[] = new tipus_dades[capacitat];
+    nom_array4[0] = valor1;
+    nom_array4[1] = valor2;
+    nom_array4[2] = valor3;
+    //...
+```
+{% endcode %}
+
+{% code title="Figura 12.10: exemples d'inicialització dels valors emmagatzemats dins d'un *array*"  overflow="wrap" lineNumbers="true" %}
+```java
+    int nums[] = new int[3];
+    float values[] = {-3.1f, 8.0f, 4.54f};
+    String names[] = null;
+
+    nums[0] = -3;
+    nums[1] = 8;
+    nums[2] = 4;
+
+    String singleName = "Mireia";
+    names[0] = singleName;          //Llençarà un NullPointerException
+```
+{% endcode %}
+
+Continuant el resseguiment de l'*array* `nums`, la Figura 12.11 mostra què passa a la *RAM* quan es declara i s'inicialitza la mida d'un *array* (passaria el mateix per a `values`).
+
+<figure>
+    <img src="img/array_ini_values.png" height="256px" alt="Inicialització dels valors emmagatzemats dins d'un array">
+    <figcaption>Figura 12.11: inicialització dels valors emmagatzemats dins d'un array</figcaption>
+</figure>
