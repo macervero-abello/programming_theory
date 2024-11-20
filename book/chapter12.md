@@ -7,5 +7,95 @@ Tal com s'ha dit en les línies de sobre, un *array* és una estructura de dades
 Quan es crea un *array*, els seus elements queden emmagatzemats a *RAM* de manera seqüencial o consecutiva, un darrere de l'altre, tal com mostra la Figura 12.1, on s'hi veu un *array* amb capacitat per a 5 nombres enters.
 <figure>
     <img src="img/array_ram.png" height="256px" alt="Array emmagatzemat a la RAM">
-    <figcaption>Figura 12.1: Array emmagatzemat a la RAM</figcaption>
+    <figcaption>Figura 12.1: array emmagatzemat a la RAM</figcaption>
 </figure>
+
+## Declaració i inicialització d'un *array*
+Per poder declarar i inicialitzar un *array* necessitem utilitzar l'operador `[]`, el qual indica que la variable que estem creant és un llistat *unidimensional* d'elements. Així doncs, la Figura 12.2 mostra les dues maneres que existeixen de crear arrays, mentre que la Figura 12.3 mostra exemples concrets
+
+{% code title="Figura 12.2: declaració d'*arrays*" %}
+```java
+    tipus_dades []nom_array1;
+    tipus_dades nom_array2[];
+```
+{% endcode %}
+
+{% code title="Figura 12.3: exemples de declaració d'*arrays*" %}
+```java
+    int nums[];
+    String subjects[];
+    float prices[];
+    char listOptions[];
+    Boolean flags[];
+```
+{% endcode %}
+
+Un cop declarat l'*array*, s'ha d'inicialitzar, de tal manera que aquesta inicialització té 3 nivells de completesa:
+1. L'*array* s'inicialitza completament buit (`null`), de tal manera que no se'n defineix cap mida i, per tant, no està preparat per poder-se fer servir.
+2. L'*array* s'inicialitza amb una mida determinada però sense cap element a dins.
+3. S'inicialitzen els valors per cadascuna de les posicions d'un *array* que ja té assignada una capacitat.
+
+### Inicialització d'un array a `null`
+Quan encara no sabem quina capacitat final tindrà un *array*, un cop declarat, s'ha d'inicialitzar a `null`. Això indica que la memòria *RAM* de l'*array* encara no ha estat preparada per a poder emmagatzemar valors (vegeu la Figura 12.4 i la Figura 12.5)
+
+{% code title="Figura 12.4: exemples de declaració d'*arrays*"  overflow="wrap" lineNumbers="true" %}
+```java
+    int nums[] = null;
+
+    if(nums == null) {          //Retornarà true
+        System.out.println("L'array és null");
+    }
+```
+{% endcode %}
+
+<figure>
+    <img src="img/array_ini_null.png" height="256px" alt="Inicialització d'un array a null">
+    <figcaption>Figura 12.5: inicialització d'un array a null</figcaption>
+</figure>
+
+### Inicialització d'un array amb una mida determinada (sense elements)
+En cas que en el moment de la declaració ja es conegui la capacitat final del nou *array*, se'n pot fer la seva inicialització utilitzant l'operador `new`, tal com mostra la Figura 12.6.
+
+{% code title="Figura 12.2: inicialització de la capacitat d'un *array*" %}
+```java
+    tipus_dades []nom_array1 = new tipus_dades[capacitat];
+    tipus_dades nom_array2[] = new tipus_dades[capacitat];
+```
+{% endcode %}
+
+L'operador `new` seguit de l'operador `[]` permet crear un nou *array* amb la capacitat indicada entre `[]`. Un cop un *array* ja té la seva grandària definida, aquest valor es pot consultar mitjançant l'atribut `length` (vegeu la línia 11 del codi de la Figura 12.7).
+
+La Figura 12.7 mostra un exemple de codi real
+{% code title="Figura 12.7: exemples d'inicialització i consulta de la capacitat dels *arrays*"  overflow="wrap" lineNumbers="true" %}
+```java
+    int capacity = 3;
+    int nums[] = new int[3];
+    float values[];
+    values = new float[capacity];
+
+    if(nums == null) {          //Retornarà false
+        System.out.println("L'array és null");
+    } else {
+        System.out.println("L'array ja té la memòria reservada " +
+                "per poder emmagatzemar els seus elements\n" +
+                "Pot emmagatzemar " + nums.length + " elements");
+        System.out.println("Els elements de l'array es començaran " +
+                "a emmagatzemar a partir de la posició de memòria " +
+                nums);
+    }
+```
+{% endcode %}
+
+Si continuem fent el resseguiment de l'*array* `nums`, la Figura 12.8 mostra què passa a la *RAM* quan es declara i s'inicialitza la mida d'un *array* (passaria el mateix per a `values`). Els passos que se segueixen quan s'executa la línia de codi 2 són els següents:
+1. S'associa una posició de memòria a la variable `nums` (tal com també mostra la Figura 12.5); en aquest cas, la posició `@2`. Aquesta variable és una **referència**, és a dir, el seu contingut no serà un valor de tipus `int`, sinó que contindrà la posició de la memòria a partir de la qual es començaran a emmagatzemar els seus elements (per tal que us en pugueu fer una idea mental, emmagatzema una *fletxa* que apunta a la 1a posició de memòria que ocuparan els seus elements).
+2. Es busca un espai a memòria que contingui tantes posicions consecutives com elements ha de contenir l'*array* (en el cas d'aquest exemple, ha de trobar 3 espais de memòria lliures seguits).
+3. Quan troba aquests espais, actualitza la **referència** de l'*array* (la posició `@2` del punt 1) per tal que apunti a la posició que contindrà el primer element.
+
+<figure>
+    <img src="img/array_ini_size.png" height="256px" alt="Inicialització de la mida d'un array">
+    <figcaption>Figura 12.8: inicialització de la mida d'un array</figcaption>
+</figure>
+
+
+### Inicialització dels elements d'un *array*
+Per tal d'inicialitzar els elements d'un *array* cal tenir en compte que, prèviament, se n'ha hagut de definir la seva capacitat. En cas contrari, el programa llençarà un `NullPointerException`.
