@@ -148,7 +148,9 @@ Com que les **referències** `nums` com `values` tenen accés al mateix *array* 
 </figure>
 
 ##### *Garbage collector*
-Quan una regió de memòria, en aquest cas un *array*, no té associada cap **referència** passa a ser innaccessible
+Quan una regió de memòria, en aquest cas un *array*, no té associada cap **referència** passa a ser inaccessible (memòria *zombie*). Això significa que el programa està gastant recursos de manera extremadament ineficient.
+
+Per solucionar aquests problemes, la màquina virtual de Java activa el *Garbage Collector*, que detecta aquesta memòria *zombie* i l'allibera, retornant els recursos al sistema.
 
 ### Inicialització dels elements d'un *array*
 Per tal d'inicialitzar els elements d'un *array* cal tenir en compte que, prèviament, se n'ha hagut de definir la seva capacitat. En cas contrari, el programa llençarà un `NullPointerException`.
