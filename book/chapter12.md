@@ -149,9 +149,49 @@ La Figura 12.9 mostra, de manera esquemàtica, l'ús de tots dos operadors (`{}`
 ```
 {% endcode %}
 
-Continuant el resseguiment de l'*array* `nums`, la Figura 12.11 mostra què passa a la *RAM* quan es declara i s'inicialitza la mida d'un *array* (passaria el mateix per a `values`).
+Continuant el resseguiment de l'*array* `nums`, la Figura 12.11 mostra què passa a la *RAM* quan es declara i s'inicialitza la mida i els elements d'un *array* (passaria el mateix per a `values`).
 
 <figure>
     <img src="img/array_ini_values.png" height="256px" alt="Inicialització dels valors emmagatzemats dins d'un array">
     <figcaption>Figura 12.11: inicialització dels valors emmagatzemats dins d'un array</figcaption>
 </figure>
+
+## Accés per posició als elements d'un *array*
+Un cop un array ha estat inicialitzat i té definida una capacitat específica, es pot accedir a cadascun dels elements emmagatzemats utilitzant l'operador d'accés per posició `[]`.
+
+Així doncs, si un *array* té capacitat per a `N` elements, les posicions, també anomenades *índexos*, a les quals es pot accedir van de la `0` a la `N-1` (dit d'altra manera, de `0` a `length-1`). Per tant, cal tenir en ment que els ordinadors sempre ***comencen a comptar des del 0***. En cas que s'intenti accedir a un índex (una posició) fora de rang (per exemple, un valor negatiu o superior a `length-1`), el programa acabarà llençant l'excepció `ArrayIndexOutOfBoundsException`
+
+La Figura 12.12 mostra diversos exemples de manipulació dels elements d'un *array*, tant en accés per a lectura com en accés per a escriptura.
+
+{% code title="Figura 12.12: exemples d'accés i manipulació dels valors emmagatzemats dins d'un *array*"  overflow="wrap" lineNumbers="true" %}
+```java
+    int nums[] = new int[3];
+    float values[] = {-3.1f, 8.0f, 4.54f};
+    String names[] = null;
+    int num1;
+    float num2;
+
+    /**
+     * Assignació dels valors a cadascuna de les
+     * posicions de l'array nums.
+     * Les posicions correctes van de 0 a nums.length-1.
+     */
+    nums[0] = -3;
+    nums[1] = 8;
+    nums[2] = 4;
+
+    nums[-1] = 3;                   //Llençarà un ArrayIndexOutOfBoundsException
+    nums[7] = 90;                   //Llençarà un ArrayIndexOutOfBoundsException
+
+    /**
+     * Exemples de múltiples operacions accedint
+     * a les posicions dels arrays de manera individual
+     */
+    num2 = values[0] + values[2];
+    nums[0] = (int) num2;
+    values[0] = num2 * nums[2];
+
+    String singleName = "Mireia";
+    names[0] = singleName;          //Llençarà un NullPointerException
+```
+{% endcode %}
