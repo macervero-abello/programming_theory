@@ -96,6 +96,59 @@ Si continuem fent el resseguiment de l'*array* `nums`, la Figura 12.8 mostra qu�
     <figcaption>Figura 12.8: inicialització de la mida d'un array</figcaption>
 </figure>
 
+#### Concepte **referència**
+El fet que la variable associada a un *array* (en l'exemple que anem resseguint, `nums`) sigui, en realitat, una **referència** que *apunta* a la primera posició de memòria on troben els seus elements té conseqüències importants en el moment de gestionar aquests espais de memòria:
+1. Assignació de referències
+2. *Garbage collector*
+
+##### Assignació de referències
+Quan s'igualen dues **referències** (dues variables associades a *arrays*, en aquest cas) el que s'està fent és crear dos *apuntadors* al mateix espai de memòria. Per entendre-ho més clarament, vegeu el codi de la Figura 12.9 i com es tradueix dins de la memòria *RAM* en la Figura 12.10
+
+{% code title="Figura 12.9: assignació de **referències* %}
+```java
+    int nums[] = new int[3];
+    int values[] = null;
+
+    nums[0] = -3;
+    nums[1] = 8;
+    nums[2] = 4;
+
+    values = nums
+```
+{% endcode %}
+
+La línia 8 de la Figura 12.9 no està igualant el contingut dels *arrays*, sinó que n'iguala les referències, de tal manera que la *RAM* que en resulta és la de la Figura 12.10.
+
+<figure>
+    <img src="img/array_ini_refs.png" height="256px" alt="Assignació de referències d'arrays">
+    <figcaption>Figura 12.10: assignació de referències d'arrays</figcaption>
+</figure>
+
+Com que les **referències** `nums` com `values` tenen accés al mateix *array* (a la mateixa regió de memòria), podem fer-hi modificacions utilitzant tant `nums` com `values` (vegeu les Figures 12.11 i 12.12).
+
+{% code title="Figura 12.11: modificació dels valors de l'*array* utilitzant múltiples referències %}
+```java
+    int nums[] = new int[3];
+    int values[] = null;
+
+    nums[0] = -3;
+    nums[1] = 8;
+    nums[2] = 4;
+
+    values = nums
+
+    values[1] = 100;
+    nums[0] = -975 
+```
+{% endcode %}
+
+<figure>
+    <img src="img/array_refs_mod.png" height="256px" alt="Modificació de l'array a través de múltiples referències">
+    <figcaption>Figura 12.12: modificació de l'array a través de múltiples referències</figcaption>
+</figure>
+
+##### *Garbage collector*
+Quan una regió de memòria, en aquest cas un *array*, no té associada cap **referència** passa a ser innaccessible
 
 ### Inicialització dels elements d'un *array*
 Per tal d'inicialitzar els elements d'un *array* cal tenir en compte que, prèviament, se n'ha hagut de definir la seva capacitat. En cas contrari, el programa llençarà un `NullPointerException`.
@@ -111,9 +164,9 @@ Cal tenir en compte que, en informàtica, l'accés a les posicions d'un *array* 
 * i així successivament.
 Molts cops, aquesta *posició* també s'anomena l'*índex* de l'*array*.
 
-La Figura 12.9 mostra, de manera esquemàtica, l'ús de tots dos operadors (`{}` i `[]`) per inicialitzar els valors emmagatzemats dins d'un array. En canvi, la Figura 12.10 mostra un exemple de codi real
+La Figura 12.13 mostra, de manera esquemàtica, l'ús de tots dos operadors (`{}` i `[]`) per inicialitzar els valors emmagatzemats dins d'un array. En canvi, la Figura 12.14 mostra un exemple de codi real
 
-{% code title="Figura 12.9: inicialització dels valors d'un *array*" %}
+{% code title="Figura 12.12: inicialització dels valors d'un *array*" %}
 ```java
     //Operador {}: inicialitza capacitat i valors interns a la vegada
     tipus_dades []nom_array1 = {valor1, valor2, valor3, ...};
@@ -134,7 +187,7 @@ La Figura 12.9 mostra, de manera esquemàtica, l'ús de tots dos operadors (`{}`
 ```
 {% endcode %}
 
-{% code title="Figura 12.10: exemples d'inicialització dels valors emmagatzemats dins d'un *array*"  overflow="wrap" lineNumbers="true" %}
+{% code title="Figura 12.13: exemples d'inicialització dels valors emmagatzemats dins d'un *array*"  overflow="wrap" lineNumbers="true" %}
 ```java
     int nums[] = new int[3];
     float values[] = {-3.1f, 8.0f, 4.54f};
@@ -149,11 +202,11 @@ La Figura 12.9 mostra, de manera esquemàtica, l'ús de tots dos operadors (`{}`
 ```
 {% endcode %}
 
-Continuant el resseguiment de l'*array* `nums`, la Figura 12.11 mostra què passa a la *RAM* quan es declara i s'inicialitza la mida i els elements d'un *array* (passaria el mateix per a `values`).
+Continuant el resseguiment de l'*array* `nums`, la Figura 12.14 mostra què passa a la *RAM* quan es declara i s'inicialitza la mida i els elements d'un *array* (passaria el mateix per a `values`).
 
 <figure>
     <img src="img/array_ini_values.png" height="256px" alt="Inicialització dels valors emmagatzemats dins d'un array">
-    <figcaption>Figura 12.11: inicialització dels valors emmagatzemats dins d'un array</figcaption>
+    <figcaption>Figura 12.14: inicialització dels valors emmagatzemats dins d'un array</figcaption>
 </figure>
 
 ## Accés per posició als elements d'un *array*
@@ -161,9 +214,9 @@ Un cop un array ha estat inicialitzat i té definida una capacitat específica, 
 
 Així doncs, si un *array* té capacitat per a `N` elements, les posicions, també anomenades *índexos*, a les quals es pot accedir van de la `0` a la `N-1` (dit d'altra manera, de `0` a `length-1`). Per tant, cal tenir en ment que els ordinadors sempre ***comencen a comptar des del 0***. En cas que s'intenti accedir a un índex (una posició) fora de rang (per exemple, un valor negatiu o superior a `length-1`), el programa acabarà llençant l'excepció `ArrayIndexOutOfBoundsException`
 
-La Figura 12.12 mostra diversos exemples de manipulació dels elements d'un *array*, tant en accés per a lectura com en accés per a escriptura.
+La Figura 12.15 mostra diversos exemples de manipulació dels elements d'un *array*, tant en accés per a lectura com en accés per a escriptura.
 
-{% code title="Figura 12.12: exemples d'accés i manipulació dels valors emmagatzemats dins d'un *array*"  overflow="wrap" lineNumbers="true" %}
+{% code title="Figura 12.15: exemples d'accés i manipulació dels valors emmagatzemats dins d'un *array*"  overflow="wrap" lineNumbers="true" %}
 ```java
     int nums[] = new int[3];
     float values[] = {-3.1f, 8.0f, 4.54f};
