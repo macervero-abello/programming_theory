@@ -18,7 +18,22 @@ Els continguts d'aquesta guia expliquen els conceptes de programació basant els
 
 ### Activitat 2. Estructures de control de flux modular: funcions i procediments
 * [Capítol 11. Control de flux modular](book/chapter11.md)
+  
+### Activitat 3. Dades compostes: introducció a les estructures de dades
 * [Capítol 12. *Arrays*](book/chapter12.md)
+* [Capítol 13. Matrius](book/chapter13.md)
+
+### Activitat 4. Introducció a la recursivitat
+* [Capítol 14. Recursivitat](book/chapter14.md)
+
+### Activitat 5. Introducció a la programació orientada a objectes (POO)
+* [Capítol 15. Programació Orientada a Objectes (POO)](book/chapter15.md)
+* [Capítol 16. Herència i *Interfaces*](book/chapter16.md)
+
+### Activitat 6. Lectura i escriptura: fitxers i fluxos de dades
+* [Capítol 17. Lectura i escriptura de fitxers de text](book/chaper17.md)
+
+
 
 
 ## Llicència

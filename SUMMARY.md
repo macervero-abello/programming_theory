@@ -13,3 +13,8 @@
 * [Capítol 10. Generació de seqüències de nombres aleatoris: la classe `Random`](book/chapter10.md)
 * [Capítol 11. Control de flux modular](book/chapter11.md)
 * [Capítol 12. *Arrays*](book/chapter12.md)
+* [Capítol 13. Matrius](book/chapter13.md)
+* [Capítol 14. Recursivitat](book/chapter14.md)
+* [Capítol 15. Programació Orientada a Objectes (POO)](book/chapter15.md)
+* [Capítol 16. Herència i *Interfaces*](book/chapter16.md)
+* [Capítol 17. Lectura i escriptura de fitxers de text](book/chaper17.md)

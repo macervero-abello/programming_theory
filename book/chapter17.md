@@ -1,0 +1,1 @@
+# Lectura i escriptura de fitxers de text
