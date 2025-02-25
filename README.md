@@ -31,7 +31,7 @@ Els continguts d'aquesta guia expliquen els conceptes de programació basant els
 * [Capítol 16. Herència i *Interfaces*](book/chapter16.md)
 
 ### Activitat 6. Lectura i escriptura: fitxers i fluxos de dades
-* [Capítol 17. Lectura i escriptura de fitxers de text](book/chaper17.md)
+* [Capítol 17. Lectura i escriptura de fitxers de text](book/chapter17.md)
 
 
 
