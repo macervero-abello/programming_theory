@@ -29,9 +29,10 @@ Els continguts d'aquesta guia expliquen els conceptes de programació basant els
 ### Activitat 5. Introducció a la programació orientada a objectes (POO)
 * [Capítol 15. Programació Orientada a Objectes (POO)](book/chapter15.md)
 * [Capítol 16. Herència i *Interfaces*](book/chapter16.md)
+* [Capítol 17. Patrons de disseny de *software*: Expert i MVC](book/chapter17.md)
 
 ### Activitat 6. Lectura i escriptura: fitxers i fluxos de dades
-* [Capítol 17. Lectura i escriptura de fitxers de text](book/chapter17.md)
+* [Capítol 18. Lectura i escriptura de fitxers de text](book/chapter18.md)
 
 
 
