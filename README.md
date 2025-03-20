@@ -32,7 +32,8 @@ Els continguts d'aquesta guia expliquen els conceptes de programació basant els
 * [Capítol 17. Patrons de disseny de *software*: Expert i MVC](book/chapter17.md)
 
 ### Activitat 6. Lectura i escriptura: fitxers i fluxos de dades
-* [Capítol 18. Lectura i escriptura de fitxers de text](book/chapter18.md)
+* [Capítol 18. Excepcions](book/chapter18.md)
+* [Capítol 19. Lectura i escriptura de fitxers de text](book/chapter19.md)
 
 
 

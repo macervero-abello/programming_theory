@@ -18,4 +18,5 @@
 * [Capítol 15. Programació Orientada a Objectes (POO)](book/chapter15.md)
 * [Capítol 16. Herència i *Interfaces*](book/chapter16.md)
 * [Capítol 17. Patrons de disseny de *software*: Expert i MVC](book/chapter17.md)
-* [Capítol 18. Lectura i escriptura de fitxers de text](book/chapter18.md)
+* [Capítol 18. Excepcions](book/chapter18.md)
+* [Capítol 19. Lectura i escriptura de fitxers de text](book/chapter19.md)
