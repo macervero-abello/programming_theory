@@ -3,6 +3,9 @@ En el moment d'implementar un programa és molt important tenir en compte la **p
 
 Aquest capítol tracta la persistència de dades en fitxers a través de la seva lectura i escriptura.
 
+## Gestió del sistema de fitxers
+TODO
+
 ## Fitxers de text
 Entendrem com a *fitxer de text* qualsevol document que s'hagi escrit mitjançant un editor de text bàsic i que contingui text en pla, és a dir, sense cap mena de format enriquit (negreta, cursiva, imatges, enllaços, etc.). Les extensions de fitxers més habituals en aquests casos són `txt` i `csv`.
 
@@ -129,9 +132,9 @@ public void readFile(String filename) throws FileNotFoundException {
 {% endcode %}
 
 {% hint style="danger" %}
-**Important:** les Figures 17.2, 17.4 i 17.6 mostren una lectura molt senzilla de les dades dels fitxers, pensada, únicament, per mostrar la informació per pantalla o, simplement, llegir-la. Si cal un tractament més elaborat i una anàlisi de les dades que conté el fitxer cal utilitzar els mètodes de tractament d'`String` (vegeu el [Capítol 8](chapter8.md)) i diverses operacions matemàtiques.
+**Important:** les Figures 19.2, 19.4 i 19.6 mostren una lectura molt senzilla de les dades dels fitxers, pensada, únicament, per mostrar la informació per pantalla o, simplement, llegir-la. Si cal un tractament més elaborat i una anàlisi de les dades que conté el fitxer cal utilitzar els mètodes de tractament d'`String` (vegeu el [Capítol 8](chapter8.md)) i diverses operacions matemàtiques.
 
-Per exemple, la Figura 19.7 refà l'exemple 17.4 per fer un còmput del nombre de paraules i de caràcters que conté el fitxer de la Figura 19.3.
+Per exemple, la Figura 19.7 refà l'exemple 19.4 per fer un còmput del nombre de paraules i de caràcters que conté el fitxer de la Figura 19.3.
 {% endhint %}
 
 {% code title="Figura 19.7: implementació de lectura de fitxer amb `BufferedReader`" overflow="wrap" lineNumbers="true" %}
@@ -287,3 +290,54 @@ public String writeFile(String filename) throws IOException {
 {% endcode %}
 
 ![Figura 19.15: resultat final d'escriptura sobre el fitxer de la Figura 19.13 en mode *sobreescriptura*](img/text_file_example_writing_overwrite.png)
+
+## Lectura d'un fitxer de text amb captura d'excepcions
+Tal com s'ha vist en els apartats anteriors, la lectura de fitxer pot provocar el llençament de dues excepcions: `FileNotFoundException` i `IOException`. Fins ara, el codi que han mostrat els exemples simplement en delegava el seu tractament. En canvi, aquesta secció mostrarà com fer-ne una captura correcta per tal de poder informar a l'usuari de l'error i evitar, tant com sigui possible, que el programa es tanqui sobtadament.
+
+La Figura 19.16 recupera l'exemple mostrat en la Figura 19.6, tot afegint-li la captura de les excepcions amb un bloc `try-catch-finally`. En aquest exemple sabem que les instruccions que poden llençar alguna excepció són les següents:
+* a)
+* b)
+* c)
+
+{% code title="Figura 19.16: implementació de lectura de fitxer amb captura d'excepcions" overflow="wrap" lineNumbers="true" %}
+```java
+public void readFile(String filename) {
+    FileReader freader = null;
+    BufferedReader breader = null;
+    Scanner sreader = null;
+    int num;
+    float decim;
+    String line;
+
+    try {
+        freader = new FileReader(filename);
+        breader = new BufferedReader(freader);
+        sreader = new Scanner(breader);
+
+        while(sreader.hasNextInt()) {
+            num = sreader.nextInt();
+        }
+
+        while(sreader.hasNextFloat()) {
+            decim = sreader.nextFloat();
+        }
+        
+        line = sreader.nextLine();
+
+        sreader.close();
+    } catch(FileNotFoundException fnfe) {
+        System.out.println(fnfe.getMessage());
+        fnfe.printStackTrace();
+    } catch(IOException ioe) {
+        System.out.println(ioe.getMessage());
+        ioe.printStackTrace();
+    }
+}
+```
+{% endcode %}
+
+
+
+## Escriptura d'un fitxer de text amb captura d'excepcions
+
+## Serialització d'objectes (fitxers binaris)
