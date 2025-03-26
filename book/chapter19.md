@@ -393,7 +393,7 @@ public void readFile(String filename) {
 {% endcode %}
 
 
-FER TRACTAMENT DIFERENCIAT DE LES DOS EXCEPCIONS I EXPLICAR-LO!!!!!!!!!!!!!!!!!!!!!!!!!
+<!-- FER TRACTAMENT DIFERENCIAT DE LES DOS EXCEPCIONS I EXPLICAR-LO!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 
 ## Escriptura d'un fitxer de text amb captura d'excepcions
