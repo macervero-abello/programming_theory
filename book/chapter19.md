@@ -294,37 +294,91 @@ public String writeFile(String filename) throws IOException {
 ## Lectura d'un fitxer de text amb captura d'excepcions
 Tal com s'ha vist en els apartats anteriors, la lectura de fitxer pot provocar el llençament de dues excepcions: `FileNotFoundException` i `IOException`. Fins ara, el codi que han mostrat els exemples simplement en delegava el seu tractament. En canvi, aquesta secció mostrarà com fer-ne una captura correcta per tal de poder informar a l'usuari de l'error i evitar, tant com sigui possible, que el programa es tanqui sobtadament.
 
-La Figura 19.16 recupera l'exemple mostrat en la Figura 19.6, tot afegint-li la captura de les excepcions amb un bloc `try-catch-finally`. En aquest exemple sabem que les instruccions que poden llençar alguna excepció són les següents:
-* a)
-* b)
-* c)
+Les Figures 19.16, 19.17 i 19.18 recuperen l'exemple mostrat en la Figura 19.4, tot afegint-li la captura de les excepcions amb un bloc `try-catch-finally`. En aquest exemple sabem que les instruccions que poden llençar alguna excepció són les següents:
+* `FileReader freader = new FileReader(filename)`: pot llençar una `FileNotFoundException`
+* `line = breader.readLine()`: pot llençar una `IOException`
+* `breader.close()`: també pot llençar una `IOException`
 
-{% code title="Figura 19.16: implementació de lectura de fitxer amb captura d'excepcions" overflow="wrap" lineNumbers="true" %}
+La Figura 19.16 fa un tractament generalitzat de les excepcions i només fa un únic `catch` per capturar un error de tipus `Exception`. Com que `Exception` és la classe mare de totes les excepcions de Java, aquest `catch` té la capacitat de capturar, per *polimorfisme*, qualsevol excepció que llenci el bloc `try`. Ara però, el principal inconvenient és que no permet fer un tractament individualitzat segons el tipus d'error que s'hagi esdevingut (tots seran tractats de la mateixa manera).
+
+{% code title="Figura 19.16: implementació de lectura de fitxer amb captura d'`Exception`" overflow="wrap" lineNumbers="true" %}
 ```java
 public void readFile(String filename) {
     FileReader freader = null;
     BufferedReader breader = null;
-    Scanner sreader = null;
-    int num;
-    float decim;
-    String line;
+    String filecontent, line;
 
     try {
         freader = new FileReader(filename);
         breader = new BufferedReader(freader);
-        sreader = new Scanner(breader);
 
-        while(sreader.hasNextInt()) {
-            num = sreader.nextInt();
+        line = breader.readLine();
+        while(line != null) {
+            filecontent += line;
+            line = breader.readLine();
         }
 
-        while(sreader.hasNextFloat()) {
-            decim = sreader.nextFloat();
-        }
-        
-        line = sreader.nextLine();
+        breader.close();
+    } catch(Exception e) {
+        System.out.println(e.getMessage());
+        e.printStackTrace();
+    }
 
-        sreader.close();
+    return filecontent;
+}
+```
+{% endcode %}
+
+La Figura 19.17, tot i fer també un únic `catch`, incrementa l'especificitat del tractament, ja que captura les excepcions de la jerarquia `IOException`, és a dir `IOException` i totes les seves filles. Com que `FileNotFoundException` és filla d'`IOException`, el bloc `catch` també la pot caputar gràcies al *polimorfisme*. Ara però, tot i l'increment d'especialització en el tractament, el codi continua tenint el mateix inconvenient que en el cas anterior: només es pot fer un tractament general per totes les excepcions.
+
+{% code title="Figura 19.17: implementació de lectura de fitxer amb captura d'`IOException`" overflow="wrap" lineNumbers="true" %}
+```java
+public void readFile(String filename) {
+    FileReader freader = null;
+    BufferedReader breader = null;
+    String filecontent, line;
+
+    try {
+        freader = new FileReader(filename);
+        breader = new BufferedReader(freader);
+
+        line = breader.readLine();
+        while(line != null) {
+            filecontent += line;
+            line = breader.readLine();
+        }
+
+        breader.close();
+    } catch(IOException ioe) {
+        System.out.println(ioe.getMessage());
+        ioe.printStackTrace();
+    }
+
+    return filecontent;
+}
+```
+{% endcode %}
+
+Finalment, la Figura 19.18 és la que planteja el codi més específic de tots els exemples mostrats fins ara, ja que crea dos blocs `catch`, un per cadascuna de les excepcions que es poden arribar a llençar dins del bloc `try`. Cal tenir en compte, però, que aquests blocs `catch` s'han d'ordenar des del més específic fins al més general, és a dir, capturant primer les excepcions més concretes fins arribar a les més generals. Quan es llença una excepció, aquesta es compara amb els tipus capturats dins de cada bloc `catch`, seguin l'ordre en què apareixen al codi, de tal manera que s'executa el primer bloc `catch` que coincideix amb el tipus de l'excepció llençada, ja sigui perquè el tipus és exactament el mateix o perquè el `catch` captura una excepció que és súperclasse de l'excepció llençada i, per tant, per *polimorfisme* coincideixen.
+
+{% code title="Figura 19.18: implementació de lectura de fitxer amb captura de les excepcions `FileNotFoundException` i `IOException`" overflow="wrap" lineNumbers="true" %}
+```java
+public void readFile(String filename) {
+    FileReader freader = null;
+    BufferedReader breader = null;
+    String filecontent, line;
+
+    try {
+        freader = new FileReader(filename);
+        breader = new BufferedReader(freader);
+
+        line = breader.readLine();
+        while(line != null) {
+            filecontent += line;
+            line = breader.readLine();
+        }
+
+        breader.close();
     } catch(FileNotFoundException fnfe) {
         System.out.println(fnfe.getMessage());
         fnfe.printStackTrace();
@@ -332,10 +386,14 @@ public void readFile(String filename) {
         System.out.println(ioe.getMessage());
         ioe.printStackTrace();
     }
+
+    return filecontent;
 }
 ```
 {% endcode %}
 
+
+FER TRACTAMENT DIFERENCIAT DE LES DOS EXCEPCIONS I EXPLICAR-LO!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 ## Escriptura d'un fitxer de text amb captura d'excepcions
