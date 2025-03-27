@@ -359,7 +359,9 @@ public void readFile(String filename) {
 ```
 {% endcode %}
 
-Finalment, la Figura 19.18 és la que planteja el codi més específic de tots els exemples mostrats fins ara, ja que crea dos blocs `catch`, un per cadascuna de les excepcions que es poden arribar a llençar dins del bloc `try`. Cal tenir en compte, però, que aquests blocs `catch` s'han d'ordenar des del més específic fins al més general, és a dir, capturant primer les excepcions més concretes fins arribar a les més generals. Quan es llença una excepció, aquesta es compara amb els tipus capturats dins de cada bloc `catch`, seguin l'ordre en què apareixen al codi, de tal manera que s'executa el primer bloc `catch` que coincideix amb el tipus de l'excepció llençada, ja sigui perquè el tipus és exactament el mateix o perquè el `catch` captura una excepció que és súperclasse de l'excepció llençada i, per tant, per *polimorfisme* coincideixen.
+Finalment, la Figura 19.18 és la que planteja el codi més específic de tots els exemples mostrats fins ara, ja que crea dos blocs `catch`, un per cadascuna de les excepcions que es poden arribar a llençar dins del bloc `try`. Cal tenir en compte, però, que aquests blocs `catch` s'han d'ordenar des del més específic fins al més general, és a dir, capturant primer les excepcions més concretes fins arribar a les més genèriques. Quan es llença una excepció, aquesta es compara amb els tipus capturats dins de cada bloc `catch`, seguin l'ordre en què apareixen al codi, de tal manera que s'executa el primer bloc `catch` que coincideix amb el tipus de l'excepció llençada, ja sigui perquè el tipus és exactament el mateix o perquè el `catch` captura una excepció que és súperclasse de la llençada i, per tant, per *polimorfisme* coincideixen.
+
+Addicionalment, la Figura 19.18 també mostra un tractament diferenciat de cadascuna de les dues excepcions tractades.
 
 {% code title="Figura 19.18: implementació de lectura de fitxer amb captura de les excepcions `FileNotFoundException` i `IOException`" overflow="wrap" lineNumbers="true" %}
 ```java
@@ -380,10 +382,10 @@ public void readFile(String filename) {
 
         breader.close();
     } catch(FileNotFoundException fnfe) {
-        System.out.println(fnfe.getMessage());
+        System.out.println("El fitxer " + filename + " no existeix (" + fnfe.getMessage() + ")");
         fnfe.printStackTrace();
     } catch(IOException ioe) {
-        System.out.println(ioe.getMessage());
+        System.out.println("Error de lectura/escriptura (" + ioe.getMessage() + ")");
         ioe.printStackTrace();
     }
 
@@ -392,10 +394,131 @@ public void readFile(String filename) {
 ```
 {% endcode %}
 
+Tot i que l'exemple de la Figura 19.18 és el més específic, presenta dos errors importants que cal corregir:
+1. No assegura un bon tancament del fitxer en cas que esdevingui una excepció.
+2. El tractament de les excepcions provoca instruccions d'interacció amb l'usuari dins del procediment de lectura, les quals només s'han de fer dins del mètode `main` o dins a la interfície gràfica de l'aplicació.
 
-<!-- FER TRACTAMENT DIFERENCIAT DE LES DOS EXCEPCIONS I EXPLICAR-LO!!!!!!!!!!!!!!!!!!!!!!!!! -->
+Els apartats que es mostren a continuació expliquen com solucionar cadascun d'aquests dos inconvenients.
 
+### Assegurar el bon tancament del fitxer de lectura
+Si tornem a analitzar el codi de la Figura 19.18 es pot veure que, en cas que les línies 10 o 13 llencin l'excepció `IOException`, el bloc `try` s'atura i, per tant, en cap moment s'arriba a executar la instrucció `breader.close()` de la línia 16, deixant el fitxer obert i, per tant, provocant una ineficiència greu de malbaratament de recursos.
+
+Per solucionar aquest problema podem utilitzar el que s'anomena *try with resources*, el qual s'encarrega de tancar tots els recursos oberts tant si es produeixen excepcions com si no. Un *resource* (recurs) és un objecte que hereta de les *interfaces* `Closable` i `AutoClosale` (vegeu l'API de Java) i que s'ha de tancar i alliberar tan bon punt el programa ja no el necessita, com per exemple, un `FileReader`, un `BufferedReader` o un `Scanner`.
+
+Per poder crear un bloc del tipus * try with resources* cal declarar i inicialitzar tots els objectes de tipus recurs dins dels parèntesis que acompanyen la sentència `try` (les declaracions i inicalitzacions aniran separades per `;`). En el context de la lectura d'un fitxer, els objectes `FileReader`, `BufferedReader` i `Scanner` s'han de crear dins dels parèntesis del `try`, tal com mostra la Figura 19.19. A més a més, ja no caldrà executar la instrucció `close()`.
+
+{% code title="Figura 19.19: exemplificació d'un bloc del tipus *try with resources*" overflow="wrap" lineNumbers="true" %}
+```java
+public void readFile(String filename) {
+    String filecontent, line;
+
+    try(FileReader freader = new FileReader(filename);
+        BufferedReader breader = new BufferedReader(freader)) {
+
+        line = breader.readLine();
+        while(line != null) {
+            filecontent += line;
+            line = breader.readLine();
+        }
+
+        //La instrucció breader.close() ja no s'ha de posar dins del codi del try
+    } catch(FileNotFoundException fnfe) {
+        System.out.println("El fitxer " + filename + " no existeix (" + fnfe.getMessage() + ")");
+        fnfe.printStackTrace();
+    } catch(IOException ioe) {
+        System.out.println("Error de lectura/escriptura (" + ioe.getMessage() + ")");
+        ioe.printStackTrace();
+    }
+
+    return filecontent;
+}
+```
+{% endcode %}
+
+### Evitar la interacció amb l'usuari dins del mètodes de lectura de fitxer
+Com ja sabem, les funcions i els procediments (mètodes) s'encarreguen d'implementar algorismes i de realitzar càlculs i mai han de gestionar la interacció amb l'usuari. D'aquesta interacció se n'ha d'encarregar el programa principal `main` o, en cas d'existir, la interfície gràfica.
+
+Així doncs, si els blocs `catch` només gestionen l'avís de l'error a l'usuari amb instruccions del tipus `System.out`, no s'han de fer dins dels mètodes de lectura, sinó que s'han de delegar al `main` (atenció, si els blocs `catch` no fan interacció amb l'usuari sinó que fan càlculs, es poden de mantenir dins dels mètodes). Així doncs, la Figura 19.20 mostra com fer aquest tipus de delegació tot assegurant un bon tancament del fitxer de lectura.
+
+{% code title="Figura 19.20: exemplificació d'un bloc del tipus *try with resources*" overflow="wrap" lineNumbers="true" %}
+```java
+public static void main() {
+    String filename = "...";
+    String filecontent = "";
+    try {
+        filecontent = readFile(filename);
+    } catch(FileNotFoundException fnfe) {
+        System.out.println("El fitxer " + filename + " no existeix (" + fnfe.getMessage() + ")");
+        fnfe.printStackTrace();
+    } catch(IOException ioe) {
+        System.out.println("Error de lectura/escriptura (" + ioe.getMessage() + ")");
+        ioe.printStackTrace();
+    }
+}
+
+private static void readFile(String filename) throws IOException {
+    String filecontent, line;
+
+    try(FileReader freader = new FileReader(filename);
+        BufferedReader breader = new BufferedReader(freader)) {
+
+        line = breader.readLine();
+        while(line != null) {
+            filecontent += line;
+            line = breader.readLine();
+        }
+    }
+
+    return filecontent;
+}
+```
+{% endcode %}
 
 ## Escriptura d'un fitxer de text amb captura d'excepcions
+L'apartat anterior fa tota l'explicació evolutiva del tractament de les excepcions mitjançant l'ús de les sentències `try-catch` fins a arribar a la solució òptima amb l'exemple de la Figura 19.20. En aquest apartat s'evitarà tornar a fer tota l'explicació completa i es passarà a mostrar la millor solució contextualitzant-la amb l'escriptura de fitxers.
+
+Tal com s'ha vist anteriorment, l'escriptura de fitxer pot provocar el llençament d'una excepció: `IOException`. Fins ara, el codi que han mostrat els exemples simplement en delegava el seu tractament. En canvi, aquesta secció mostrarà com fer-ne una captura correcta per tal de poder informar a l'usuari de l'error i evitar, tant com sigui possible, que el programa es tanqui sobtadament.
+
+La Figura 19.21 recupera l'exemple mostrat en la Figura 19.11 i hi afegeix la captura de l'excepció amb un bloc `try-catch-finally`. En aquest exemple sabem que les instruccions que poden llençar alguna excepció són les següents:
+* `FileWriter fwriter = new FileWriter(filename, true)`
+* `brwiter.newLine()`
+* `brwiter.write(filecontent)`
+* `brwiter.close()`
+
+La Figura 19.21 fa el tractament de l'excepció tot assegurant:
+1. que el fitxer es pugui crear (el directori on es vol guardar existeix);
+2. el bon tancament del recurs
+3. i que tota la interacció amb l'usuari es fa dins del programa principal `main`.
+
+{% code title="Figura 19.21: implementació de l'escriputra de fitxer amb `BufferedWriter` (mode *append*)" overflow="wrap" lineNumbers="true" %}
+```java
+public static void main() {
+    String filename = "...";
+    try {
+        writeFile(filename);
+    } catch(IOException ioe) {
+        System.out.println("Error de lectura/escriptura (" + ioe.getMessage() + ")");
+        ioe.printStackTrace();
+    }
+}
+
+private static void writeFile(String filename) throws IOException {
+    //Ens assegurem que les carpetes existeixen
+    File file = new File(filename);
+    if(file.getParentFile() != null && !file.getParentFile().exists()) {
+        file.getParentFile().mkdirs();
+    }
+
+    //Fem l'escruptura tractant l'excepció
+    String filecontent = "Estem fent classe de programació a DAM1";
+    try(FileWriter fwriter = new FileWriter(filename, true);
+        BufferedWriter bwriter = new BufferedWriter(fwriter)) {
+
+        bwriter.newLine();
+        bwriter.write(filecontent);
+    }
+}
+```
+{% endcode %}
 
 ## Serialització d'objectes (fitxers binaris)
