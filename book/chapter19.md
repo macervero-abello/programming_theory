@@ -521,4 +521,163 @@ private static void writeFile(String filename) throws IOException {
 ```
 {% endcode %}
 
-## Serialització d'objectes (fitxers binaris)
+## Serialització i deserialització d'objectes (fitxers binaris)
+La serialització és la metodologia que ens permet transformar un objecte a un flux de dades (*stream*) binari per
+1. gestionar el *swapping* de memòria (descàrrega de les dades de memòria RAM a disc dur quan la capacitat de la RAM és limitada);
+2. enviar les dades a través de la xarxa;
+3. transferir dades per executar mètodes de manera remota o
+4. emmagatzemar, de manera temporal, les dades a un fitxer.
+
+La deserialització, en canvi, és el pas contrari, recuperar els objectes les dades dels quals es troben en un flux de dades binari.
+
+Per aconseguir l'objectiu, la tècnica de serialització accedeix a la memòria RAM de l'objecte, en concret, a la zona d'atributs, i transforma les dades a binàries per tal de poder-les introduir a l'*stream*. La deserialització, en canvi, obté les dades de l'*stream*, les transforma de binàries als tipus corresponents i, un cop fet això, les carrega a la zona d'atributs de la memòria RAM de l'objecte que volem deserialitzar.
+
+Així doncs, imaginem la classe `Person` de la Figura 19.22, la qual té tres atributs: `name`, `surname` i `age`. Les Figures 19.23 i 19.24 mostren el procés per serialitzar-la i deserialitzar-la.
+{% code title="Figura 19.22: classe `Person`" overflow="wrap" lineNumbers="true" %}
+```java
+public class Person {
+    private String surname;
+    private String name;
+    private int age;
+
+    public Person(String name, String surname, int age) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return this.surname + ", " + this.name + " (" + this.age + ") ";
+    }
+}
+```
+{% endcode %}
+
+![Figura 19.23: procés de serialització de la classe `Person`](img/serialization.png)
+
+![Figura 19.24: procés de deserialització de la classe `Person`](img/deserialization.png)
+
+### Preparació per poder serialitzar i deserialitzar un objecte
+Per poder serialitzar o deserialitzar els objectes d'una classe cal que aquesta classe implementi la *interface* `Serializable`, la quan s'anomena *marker interface* perquè no té cap mètode abstracte i només s'utilitza com a eina del llenguatge Java per indicar que una classe es pot traspassar a través d'un flux de dades. Si s'intenta serialitzar o deserialitzar una classe que no implementi aquesta *interface*, el programa llença l'excepció `NotSerializableException`.
+
+Podem veure, doncs, que el codi de la Figura 19.22 és incorrecte i que, per tant, caldria fer-ho tal com mostra la Figura 19.25.
+{% code title="Figura 19.25: classe `Person` serializable" overflow="wrap" lineNumbers="true" %}
+```java
+public class Person implements Serializable {
+    private String surname;
+    private String name;
+    private int age;
+
+    public Person(String name, String surname, int age) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return this.surname + ", " + this.name + " (" + this.age + ") ";
+    }
+}
+```
+{% endcode %}
+
+Addicionalment, si s'afegeix a `Person` un atribut de tipus `PersonID`
+```java
+    public class PersonID {
+        private String type;
+        private String num;
+
+        public PersonID(String type, String num) {
+            this.type = type;
+            this.num = num
+        }
+
+        @Override
+        public String toString() {
+            return this.type + ": " + this.num;
+        }
+    }
+```
+cal que aquesta classe també sigui serializable per tal que el procés de serialització/deserialització de `Person` es completi correctament i no llenci l'excepció `NotSerializableException` (vegeu la Figura 19.26).
+{% code title="Figura 19.26: classe `Person` amb un atribut complex serializable" overflow="wrap" lineNumbers="true" %}
+```java
+public class PersonID implements Serializable {
+        private String type;
+        private String num;
+
+        public PersonID(String type, String num) {
+            this.type = type;
+            this.num = num
+        }
+
+        @Override
+        public String toString() {
+            return this.type + ": " + this.num;
+        }
+    }
+
+
+public class Person implements Serializable {
+    private String surname;
+    private String name;
+    private int age;
+    private PersonID id;
+
+    public Person(String name, String surname, int age, PersonID id) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.id = id;           //Attention: shallow copy!
+    }
+
+    @Override
+    public String toString() {
+        return this.surname + ", " + this.name + " (" + this.age + ")\n" + this.id.toString();
+    }
+}
+```
+{% endcode %}
+
+### Procés de serialització
+Un cop ja ens hem assegurat que els objectes que volem serialitzar implementen la *interface* `Serializable` podem procedir a transformar-los a flux de dades mitjançant l'ús de les classes
+* `FileOutputStream` i
+* `ObjectOutputStream`
+
+La classe `FileOutputStream` s'encarregarà d'obrir el fitxer on es volen guardar les dades serialitzades i, en canvi, la classe `ObjectOutputStream` s'encarregarà d'escriure-hi les dades mitjançant l'ús del mètode `writeObject()`. Vegeu la Figura 19.27 per tenir un exemple senzill de serialització:
+{% code title="Figura 19.27: procés de serialització d'un objecte de tipus `Person`" overflow="wrap" lineNumbers="true" %}
+```java
+public class SerializationMain {
+    public static void main(String[] args) throws IOException {
+        Person p = new Person("M.Àngels", "Cerveró Abelló", 39, new PersonID("DNI", "123456789A"));
+
+        FileOutputStream fos = new FileOutputStream("files" + File.separator + "data.dat");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(p);
+
+        oos.close();
+    }
+}
+```
+{% endcode %}
+
+En cas que es vulgui fer la captura de les excepcions que llença el procés, es pot crear un bloc `try-catch` tal com mostra la Figura 19.28
+{% code title="Figura 19.28: procés de serialització d'un objecte de tipus `Person` amb captura d'excepcions" overflow="wrap" lineNumbers="true" %}
+```java
+public class SerializationMain {
+    public static void main(String[] args) {
+        Person p = new Person("M.Àngels", "Cerveró Abelló", 39, new PersonID("DNI", "123456789A"));
+
+        try(FileOutputStream fos = new FileOutputStream("files" + File.separator + "data.dat");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+            oos.writeObject(p);
+        } catch(FileNotFoundException fnfe) {
+            System.out.println("Fitxer no trobat (" + fnfe.getMessage() + ")");
+        } catch(IOException ioe) {
+            System.out.println("Error de lectura/escriptura (" + ioe.getMessage() + ")");
+        }
+    }
+}
+```
+{% endcode %}
