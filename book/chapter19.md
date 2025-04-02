@@ -681,3 +681,52 @@ public class SerializationMain {
 }
 ```
 {% endcode %}
+
+### Procés de deserialització
+Per poder deserialitzar un flux de dades i transformar la informació a objectes del tipus correcte s'han d'utilitzar dues classes:
+* `FileInputStream` i
+* `ObjectInputStream`
+
+La classe `FileInputStream` s'encarregarà d'obrir el fitxer on es troba la informació codificada en binari (les dades serialitzades) i, en canvi, la classe `ObjectInputStream` s'encarregarà de llegir-ne les dades mitjançant l'ús del mètode `readObject()`. Vegeu la Figura 19.29 per tenir un exemple senzill de deserialització:
+{% code title="Figura 19.29: procés de deserialització d'un objecte de tipus `Person`" overflow="wrap" lineNumbers="true" %}
+```java
+public class SerializationMain {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Person p = null;
+
+        FileInputStream fis = new FileInputStream("files" + File.separator + "data.dat");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        p = (Person) ois.readObject();
+
+        oos.close();
+    }
+}
+```
+{% endcode %}
+
+En cas que es vulgui fer la captura de les excepcions que llença el procés, es pot crear un bloc `try-catch` tal com mostra la Figura 19.30
+{% code title="Figura 19.30: procés de deserialització d'un objecte de tipus `Person` amb captura d'excepcions" overflow="wrap" lineNumbers="true" %}
+```java
+public class SerializationMain {
+    public static void main(String[] args) {
+        Person p = null
+
+        try(FileInputStream fis = new FileInputStream("files" + File.separator + "data.dat");
+            ObjectInputStream ois = new ObjectInputStream(fos);) {
+            p = (Person) ois.readObject();
+        } catch(FileNotFoundException fnfe) {
+            System.out.println("Fitxer no trobat (" + fnfe.getMessage() + ")");
+        } catch(IOException ioe) {
+            System.out.println("Error de lectura/escriptura (" + ioe.getMessage() + ")");
+        } catch(ClassNotFoundException cnfe) {
+            System.out.println("La classe no s'ha trobat (" + cnfe.getMessage() + ")")
+        }
+    }
+}
+```
+{% endcode %}
+
+### Gestió de la versió de codi
+TODO
+* private final static long serialVersionUID
+* Els atributs static no es serialitzen
