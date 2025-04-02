@@ -20,3 +20,5 @@
 * [Capítol 17. Patrons de disseny de *software*: Expert i MVC](book/chapter17.md)
 * [Capítol 18. Excepcions](book/chapter18.md)
 * [Capítol 19. Lectura i escriptura de fitxers de text](book/chapter19.md)
+* [Capítol 20. Streams](book/chapter20.md)
+* [Capítol 21. Estructures de dades: Java Collections Framework](book/chapter21.md)

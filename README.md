@@ -34,6 +34,10 @@ Els continguts d'aquesta guia expliquen els conceptes de programació basant els
 ### Activitat 6. Lectura i escriptura: fitxers i fluxos de dades
 * [Capítol 18. Excepcions](book/chapter18.md)
 * [Capítol 19. Lectura i escriptura de fitxers de text](book/chapter19.md)
+* [Capítol 20. Streams](book/chapter20.md)
+
+### Activitat 7. Estructures d’emmagatzematge
+* [Capítol 21. Estructures de dades: Java Collections Framework](book/chapter21.md)
 
 
 
